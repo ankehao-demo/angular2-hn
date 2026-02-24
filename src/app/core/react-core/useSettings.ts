@@ -19,7 +19,7 @@ export interface Settings {
 const initialSettings: Settings = {
   showSettings: false,
   openLinkInNewTab: localStorage.getItem('openLinkInNewTab')
-    ? JSON.parse(localStorage.getItem('openLinkInNewTab') as string)
+    ? JSON.parse(localStorage.getItem('openLinkInNewTab') || 'false')
     : false,
   theme: 'default',
   titleFontSize: localStorage.getItem('titleFontSize') || '16',
@@ -46,7 +46,7 @@ function initTheme(): void {
   if (savedTheme) {
     sharedSettings.theme = savedTheme;
   } else {
-    const darkColorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkColorSchemeMedia = globalThis.matchMedia('(prefers-color-scheme: dark)');
     sharedSettings.theme = darkColorSchemeMedia.matches ? 'night' : 'default';
   }
 }
@@ -73,7 +73,7 @@ export function useSettings() {
 
   // Listen for system color scheme changes (mirrors subscribeToSystemPreferredColorScheme)
   useEffect(() => {
-    const darkColorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkColorSchemeMedia = globalThis.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (event: MediaQueryListEvent) => {
       const theme = event.matches ? 'night' : 'default';
       sharedSettings = { ...sharedSettings, theme };

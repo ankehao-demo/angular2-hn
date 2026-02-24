@@ -47,12 +47,18 @@ export const Header: React.FC = () => {
           </div>
         </div>
         <div className="info">
-          <img
-            className="settings"
-            src="assets/images/cog.svg"
-            alt="Settings"
+          <button
+            type="button"
+            className="settings-button"
             onClick={toggleSettings}
-          />
+            aria-label="Toggle settings"
+          >
+            <img
+              className="settings"
+              src="assets/images/cog.svg"
+              alt="Settings"
+            />
+          </button>
         </div>
       </div>
       {settings.showSettings && <Settings />}

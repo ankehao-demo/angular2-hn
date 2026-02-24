@@ -45,9 +45,14 @@ export const Settings: React.FC = () => {
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={handleCloseSettings}>
+        <button
+          type="button"
+          className="close"
+          onClick={handleCloseSettings}
+          aria-label="Close settings"
+        >
           &times;
-        </span>
+        </button>
         <div className="content">
           <div className="control-section">
             <h2>Links</h2>
@@ -105,11 +110,11 @@ export const Settings: React.FC = () => {
               <h2>Change Font</h2>
               <div>
                 <label>
-                  Font size:
+                  Font size:{' '}
                   <input
                     min={1}
                     defaultValue={settings.titleFontSize}
-                    name="theme"
+                    name="titleFontSize"
                     type="number"
                     onKeyUp={handleTitleFontChange}
                   />
@@ -117,11 +122,11 @@ export const Settings: React.FC = () => {
               </div>
               <div>
                 <label>
-                  List spacing:
+                  List spacing:{' '}
                   <input
                     min={0}
                     defaultValue={settings.listSpacing}
-                    name="theme"
+                    name="listSpacing"
                     type="number"
                     onKeyUp={handleSpacingChange}
                   />

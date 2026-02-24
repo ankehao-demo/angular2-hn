@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { Settings } from '../models/Settings';
 
 interface SettingsContextValue {
@@ -24,8 +24,6 @@ const SettingsContext = createContext<SettingsContextValue | undefined>(undefine
 
 export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [settings, setSettings] = useState<Settings>(defaultSettings);
-    const handleColorSchemeChangeRef = useRef<(event: MediaQueryListEvent) => void>();
-
     const setTheme = useCallback((theme: string) => {
         setSettings((prev) => ({ ...prev, theme }));
         localStorage.setItem('theme', theme);
@@ -54,33 +52,29 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }, []);
 
     // Subscribe to system preferred color scheme changes
+    // Mirrors Angular SettingsService constructor + ngOnDestroy
     useEffect(() => {
         const darkColorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
 
-        handleColorSchemeChangeRef.current = (event: MediaQueryListEvent) => {
+        const handleColorSchemeChange = (event: MediaQueryListEvent): void => {
             const theme = event.matches ? 'night' : 'default';
             setTheme(theme);
         };
 
-        darkColorSchemeMedia.addEventListener('change', handleColorSchemeChangeRef.current);
+        darkColorSchemeMedia.addEventListener('change', handleColorSchemeChange);
 
-        // Init theme
+        // Init theme: check localStorage first, then fall back to system preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             setSettings((prev) => ({ ...prev, theme: savedTheme }));
         } else {
-            darkColorSchemeMedia.dispatchEvent(
-                new MediaQueryListEvent('change', {
-                    media: darkColorSchemeMedia.media,
-                    matches: darkColorSchemeMedia.matches,
-                })
-            );
+            // Apply system preference directly instead of dispatching a synthetic event
+            const initialTheme = darkColorSchemeMedia.matches ? 'night' : 'default';
+            setTheme(initialTheme);
         }
 
         return () => {
-            if (handleColorSchemeChangeRef.current) {
-                darkColorSchemeMedia.removeEventListener('change', handleColorSchemeChangeRef.current);
-            }
+            darkColorSchemeMedia.removeEventListener('change', handleColorSchemeChange);
         };
     }, [setTheme]);
 

@@ -53,12 +53,13 @@ export const Item: React.FC<ItemProps> = ({ item }) => {
         </p>
       ) : (
         <p>
-          <a
+          <Link
             className="title"
             style={{ fontSize: `${settings.titleFontSize}px` }}
+            to={`/item/${item.id}`}
           >
-            <Link to={`/item/${item.id}`}>{item.title}</Link>
-          </a>
+            {item.title}
+          </Link>
         </p>
       )}
 

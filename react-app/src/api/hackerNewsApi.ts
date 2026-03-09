@@ -1,4 +1,4 @@
-import { Story, User, PollResult } from '../types';
+import type { Story, User, PollResult } from '../types';
 
 const BASE_URL = 'https://node-hnapi.herokuapp.com';
 

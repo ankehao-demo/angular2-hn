@@ -1,6 +1,6 @@
-export * from './feed-type';
-export * from './poll-result';
-export * from './comment';
-export * from './story';
-export * from './user';
-export * from './settings';
+export type { FeedType } from './feed-type';
+export type { PollResult } from './poll-result';
+export type { Comment } from './comment';
+export type { Story } from './story';
+export type { User } from './user';
+export type { Settings } from './settings';

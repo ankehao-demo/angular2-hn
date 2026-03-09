@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
-import { Settings } from '../types';
+import type { Settings } from '../types';
 
 interface SettingsContextValue {
   settings: Settings;

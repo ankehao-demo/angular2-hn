@@ -37,7 +37,7 @@ export const Item: React.FC<ItemProps> = ({ item }) => {
   const hasUrl = item.url && item.url.indexOf('http') === 0;
 
   return (
-    <div style={{ marginBottom: `${settings.listSpacing}px` }}>
+    <div className="item-block" style={{ marginBottom: `${settings.listSpacing}px` }}>
       {hasUrl ? (
         <p>
           <a

@@ -36,13 +36,14 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   }, []);
 
-  // Listen for system color scheme changes
+  // Listen for system color scheme changes (only apply if user hasn't explicitly set a theme)
   useEffect(() => {
     const media = darkMediaRef.current;
     const handler = (e: MediaQueryListEvent) => {
-      const theme = e.matches ? 'night' : 'default';
-      setSettings(prev => ({ ...prev, theme }));
-      localStorage.setItem('theme', theme);
+      if (!localStorage.getItem('theme')) {
+        const theme = e.matches ? 'night' : 'default';
+        setSettings(prev => ({ ...prev, theme }));
+      }
     };
     media.addEventListener('change', handler);
     return () => media.removeEventListener('change', handler);

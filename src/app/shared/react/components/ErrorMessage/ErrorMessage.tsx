@@ -1,0 +1,33 @@
+import React from 'react';
+import './ErrorMessage.scss';
+
+interface ErrorMessageProps {
+  message: string;
+}
+
+/**
+ * ErrorMessage component — replaces Angular's ErrorMessageComponent.
+ *
+ * Displays a skull CSS art graphic with an error message and offline notice.
+ *
+ * @Input() message → props.message
+ */
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+  return (
+    <div className="error-section">
+      <div className="skull">
+        <div className="head">
+          <div className="crack"></div>
+        </div>
+        <div className="mouth">
+          <div className="teeth"></div>
+        </div>
+      </div>
+      <p className="strong">{message}</p>
+      <p>
+        If you are offline viewing, you&apos;ll need to visit this page with a network connection
+        first before it can work offline.
+      </p>
+    </div>
+  );
+};

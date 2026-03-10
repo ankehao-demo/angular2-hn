@@ -243,10 +243,12 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
                 )}
 
                 {/* Item content */}
-                <p
-                    className="subject"
-                    dangerouslySetInnerHTML={{ __html: item.content }}
-                />
+                {item.content && (
+                    <p
+                        className="subject"
+                        dangerouslySetInnerHTML={{ __html: item.content }}
+                    />
+                )}
 
                 {/* Comments tree */}
                 <ul className="comment-list">

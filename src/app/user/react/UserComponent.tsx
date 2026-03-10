@@ -1,5 +1,6 @@
 import React from 'react';
 import { useUser } from './useUser';
+import { sanitizeHtml } from './sanitize';
 import './UserComponent.css';
 
 // TODO: Replace with shared React Loader component when available
@@ -50,7 +51,7 @@ export const UserComponent: React.FC<UserComponentProps> = ({ userId, onGoBack }
             </div>
             {user.about && (
                 <div className="other-details">
-                    <p dangerouslySetInnerHTML={{ __html: user.about }} />
+                    <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(user.about) }} />
                 </div>
             )}
         </div>

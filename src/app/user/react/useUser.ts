@@ -18,7 +18,12 @@ export function useUser(id: string | undefined): { user: User | null; errorMessa
         setErrorMessage('');
 
         fetch(`${BASE_URL}/user/${id}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}`);
+                }
+                return res.json();
+            })
             .then((data: User) => {
                 if (!cancelled) {
                     setUser(data);

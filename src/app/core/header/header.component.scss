@@ -131,11 +131,32 @@ h1 {
     right: 10px;
   }
 
+  .logout-link {
+    color: hsla(0, 0%, 100%, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 23px;
+    margin-right: 15px;
+    vertical-align: top;
+    letter-spacing: 1px;
+
+    &:hover {
+      color: #fff;
+    }
+
+    @media #{$mobile-only} {
+      margin-top: 17px;
+      margin-right: 10px;
+    }
+  }
+
   img {
     opacity: 0.8;
     width: 25px;
     margin-top: 21.5px;
-    display: block;
+    display: inline-block;
 
     &:hover {
       opacity: 1;

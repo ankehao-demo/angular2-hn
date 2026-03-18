@@ -18,6 +18,7 @@
         </div>
       </div>
       <div class="info">
+        <a class="logout-link" *ngIf="isLoggedIn" (click)="logout()">Logout</a>
         <img class="settings" src="assets/images/cog.svg" alt="Settings" (click)="toggleSettings()">
       </div>
     </div>

@@ -15,7 +15,7 @@ export function FeedPage() {
 
   const pathSegments = location.pathname.split('/');
   const feedType = pathSegments[1] || 'news';
-  const pageNum = page ? parseInt(page, 10) : 1;
+  const pageNum = page ? Number.parseInt(page, 10) : 1;
   const listStart = (pageNum - 1) * 30 + 1;
 
   useEffect(() => {

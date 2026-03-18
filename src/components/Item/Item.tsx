@@ -10,7 +10,7 @@ interface ItemProps {
 
 export function Item({ item }: ItemProps) {
   const { settings } = useSettings();
-  const hasUrl = item.url && item.url.indexOf('http') === 0;
+  const hasUrl = item.url?.startsWith('http') ?? false;
 
   return (
     <div style={{ marginBottom: `${settings.listSpacing}px` }}>

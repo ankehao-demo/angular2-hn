@@ -65,26 +65,24 @@ export function Settings() {
             <div className="control-section">
               <h2>Change Font</h2>
               <div>
-                <label>
-                  Font size:
-                  <input
-                    min={1}
-                    value={settings.titleFontSize}
-                    type="number"
-                    onChange={(e) => setFont(e.target.value)}
-                  />
-                </label>
+                <label htmlFor="font-size">Font size:</label>
+                <input
+                  id="font-size"
+                  min={1}
+                  value={settings.titleFontSize}
+                  type="number"
+                  onChange={(e) => setFont(e.target.value)}
+                />
               </div>
               <div>
-                <label>
-                  List spacing:
-                  <input
-                    min={0}
-                    value={settings.listSpacing}
-                    type="number"
-                    onChange={(e) => setSpacing(e.target.value)}
-                  />
-                </label>
+                <label htmlFor="list-spacing">List spacing:</label>
+                <input
+                  id="list-spacing"
+                  min={0}
+                  value={settings.listSpacing}
+                  type="number"
+                  onChange={(e) => setSpacing(e.target.value)}
+                />
               </div>
             </div>
           </div>

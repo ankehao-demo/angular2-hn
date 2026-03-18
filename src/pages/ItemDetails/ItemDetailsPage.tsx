@@ -22,7 +22,7 @@ export function ItemDetailsPage() {
     const controller = new AbortController();
 
     if (id) {
-      fetchItemContent(parseInt(id, 10), controller.signal)
+      fetchItemContent(Number.parseInt(id, 10), controller.signal)
         .then((data) => {
           setItem(data);
         })
@@ -42,7 +42,7 @@ export function ItemDetailsPage() {
     navigate(-1);
   };
 
-  const hasUrl = item ? item.url && item.url.indexOf('http') === 0 : false;
+  const hasUrl = item?.url?.startsWith('http') ?? false;
 
   return (
     <div className="main-content">

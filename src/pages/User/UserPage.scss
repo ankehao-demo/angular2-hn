@@ -27,13 +27,15 @@ pre {
     width: 0.6rem;
     height: 0.6rem;
     background: transparent;
+    border: none;
+    padding: 0;
     box-shadow: 0 0 0 lightgray;
     transition: all 200ms ease;
     left: 4%;
     transform: translate3d(0, -50%, 0) rotate(-135deg);
+    cursor: pointer;
   }
   .item-header {
-    padding-bottom: 10px;
     background-color: #fff;
     padding: 10px 0 10px 0;
     position: fixed;

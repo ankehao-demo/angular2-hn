@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): boolean {
-    if (username === environment.authUsername && password === environment.authPassword) {
+    if (username === environment.authCredentials.username && password === environment.authCredentials.secret) {
       localStorage.setItem('auth_logged_in', 'true');
       this.loggedIn.next(true);
       return true;

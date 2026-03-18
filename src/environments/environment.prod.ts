@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  authCredentials: {
+    username: 'admin',
+    secret: 'p@ssw0rd1'
+  }
 };

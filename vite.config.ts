@@ -26,6 +26,20 @@ export default defineConfig({
             },
           },
           {
+            urlPattern: /^https:\/\/hacker-news\.firebaseio\.com\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'hn-firebase-api-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24, // 24 hours
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
             urlPattern: /\.(?:png|jpg|jpeg|svg|gif|ico)$/,
             handler: 'CacheFirst',
             options: {

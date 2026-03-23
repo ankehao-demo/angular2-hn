@@ -22,7 +22,7 @@
   $border
 ) {
   .#{$name} {
-    .body-cover {
+    [class*="bodyCover"], .body-cover {
       background: $body-background-color;
 
       @media #{$mobile-only} {
@@ -30,7 +30,7 @@
       }
     }
 
-    .wrapper {
+    [class*="wrapper"], .wrapper {
       background: $wrapper-background-color;
       color: $wrapper-color;
 
@@ -61,6 +61,22 @@
 
           @media #{$mobile-only} {
             color: $secondary-link-color;
+          }
+        }
+      }
+
+      [class*="settings"] {
+        filter: brightness(10);
+      }
+
+      [class*="headerNav"] {
+        a {
+          color: hsla(0, 0%, 100%, 0.9);
+          &:hover {
+            color: #fff;
+          }
+          &:visited {
+            color: hsla(0, 0%, 100%, 0.9);
           }
         }
       }

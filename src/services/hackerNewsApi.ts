@@ -41,7 +41,20 @@ export async function fetchPollContent(id: number): Promise<PollResult> {
 }
 
 export async function fetchUser(id: string): Promise<User> {
-  const res = await fetch(`${BASE_URL}/user/${id}`);
+  const res = await fetch(`https://hacker-news.firebaseio.com/v0/user/${id}.json`);
   if (!res.ok) throw new Error('Failed to fetch user');
-  return res.json();
+  const data = await res.json();
+  if (!data) throw new Error('User not found');
+  return {
+    id: data.id,
+    crated_time: data.created,
+    created: new Date(data.created * 1000).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+    karma: data.karma,
+    avg: 0,
+    about: data.about || '',
+  };
 }

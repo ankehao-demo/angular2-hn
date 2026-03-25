@@ -13,7 +13,12 @@ describe('FeedComponent', () => {
 
   beforeEach(async(() => {
     mockStories = [
-      { id: 1, title: 'Story 1', points: 10, user: 'u1', time: 1, time_ago: 1, type: 'story', url: 'http://example.com', domain: 'example.com', comments: [], comments_count: 5, poll: [], poll_votes_count: 0, deleted: false, dead: false },
+      {
+        id: 1, title: 'Story 1', points: 10, user: 'u1', time: 1,
+        time_ago: 1, type: 'story', url: 'http://example.com',
+        domain: 'example.com', comments: [], comments_count: 5,
+        poll: [], poll_votes_count: 0, deleted: false, dead: false
+      },
     ];
 
     mockHNService = {

@@ -41,7 +41,11 @@ describe('HackerNewsAPIService', () => {
 
   it('fetchFeed("news", 1) should call the correct URL and return Observable of Story[]', (done) => {
     const mockStories: any[] = [
-      { id: 1, title: 'Test Story', points: 10, user: 'user1', time: 123, time_ago: 1, type: 'story', url: 'http://example.com', domain: 'example.com', comments: [], comments_count: 5 },
+      {
+        id: 1, title: 'Test Story', points: 10, user: 'user1',
+        time: 123, time_ago: 1, type: 'story', url: 'http://example.com',
+        domain: 'example.com', comments: [], comments_count: 5
+      },
     ];
 
     service.fetchFeed('news', 1).subscribe(result => {
@@ -54,7 +58,11 @@ describe('HackerNewsAPIService', () => {
   });
 
   it('fetchItemContent(123) should call the correct URL and return Observable of Story', (done) => {
-    const mockStory: any = { id: 123, title: 'Test', points: 5, user: 'u', time: 1, time_ago: 1, type: 'story', url: 'http://test.com', domain: 'test.com', comments: [], comments_count: 0 };
+    const mockStory: any = {
+      id: 123, title: 'Test', points: 5, user: 'u', time: 1,
+      time_ago: 1, type: 'story', url: 'http://test.com',
+      domain: 'test.com', comments: [], comments_count: 0
+    };
 
     service.fetchItemContent(123).subscribe(result => {
       expect(xhrMock.open).toHaveBeenCalledWith('get', 'https://node-hnapi.herokuapp.com/item/123', true);

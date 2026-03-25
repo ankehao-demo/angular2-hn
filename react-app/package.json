@@ -1,0 +1,30 @@
+{
+  "name": "angular2-hn-react",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "react-router-dom": "^6",
+    "@tanstack/react-query": "^5"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "vite": "^5",
+    "@vitejs/plugin-react": "^4",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "sass": "^1",
+    "vitest": "^1",
+    "@testing-library/react": "^14",
+    "@testing-library/jest-dom": "^6",
+    "vite-plugin-pwa": "^0.17"
+  }
+}

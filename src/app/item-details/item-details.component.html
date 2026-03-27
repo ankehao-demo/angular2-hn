@@ -40,6 +40,9 @@
             </a>
           </span>
         </span>
+        <button class="bookmark-btn" (click)="toggleBookmark()" [class.bookmarked]="isBookmarked()" title="{{isBookmarked() ? 'Remove bookmark' : 'Bookmark this story'}}">
+          {{isBookmarked() ? '★' : '☆'}}
+        </button>
       </div>
     </div>
     <div *ngIf="item.type === 'poll'" class="pollResults">

@@ -1,0 +1,11 @@
+<div class="main-content">
+  <h2 class="saved-header">Saved Stories</h2>
+  <div *ngIf="stories.length === 0" class="empty-message">
+    No saved stories yet.
+  </div>
+  <ol *ngIf="stories.length > 0">
+    <li *ngFor="let story of stories" class="post">
+      <item class="item-block" [item]="story"></item>
+    </li>
+  </ol>
+</div>

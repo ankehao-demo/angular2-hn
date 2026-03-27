@@ -7,7 +7,7 @@ interface CommentProps {
   comment: CommentType;
 }
 
-export function Comment({ comment }: CommentProps) {
+export function Comment({ comment }: Readonly<CommentProps>) {
   const [collapse, setCollapse] = useState(false);
 
   if (comment.deleted) {
@@ -23,9 +23,9 @@ export function Comment({ comment }: CommentProps) {
   return (
     <div>
       <div className={`meta${collapse ? ' meta-collapse' : ''}`}>
-        <span className="collapse" onClick={() => setCollapse(!collapse)}>
+        <button className="collapse" onClick={() => setCollapse(!collapse)} aria-label={collapse ? 'Expand comment' : 'Collapse comment'}>
           [{collapse ? '+' : '-'}]
-        </span>{' '}
+        </button>{' '}
         <Link to={`/user/${comment.user}`}>{comment.user}</Link>
         <span className="time">{comment.time_ago}</span>
       </div>

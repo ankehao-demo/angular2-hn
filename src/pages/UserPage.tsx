@@ -6,7 +6,7 @@ import './UserPage.scss';
 
 export function UserPage() {
   const { id } = useParams<{ id: string }>();
-  const { data: user, isLoading, error } = useHackerNewsUser(id!);
+  const { data: user, isLoading, error } = useHackerNewsUser(id ?? '');
 
   const goBack = () => {
     window.history.back();
@@ -17,11 +17,10 @@ export function UserPage() {
   if (!user) return null;
 
   return (
-    <>
       <div className="profile">
         <div className="mobile item-header">
           <p className="title-block">
-            <span className="back-button" onClick={goBack}></span>
+            <button className="back-button" onClick={goBack} aria-label="Go back"></button>
             Profile: {user.id}
           </p>
         </div>
@@ -36,6 +35,5 @@ export function UserPage() {
           </div>
         )}
       </div>
-    </>
   );
 }

@@ -8,9 +8,9 @@ interface ItemRowProps {
   item: Story;
 }
 
-export function ItemRow({ item }: ItemRowProps) {
+export function ItemRow({ item }: Readonly<ItemRowProps>) {
   const { settings } = useSettings();
-  const hasUrl = item.url && item.url.indexOf('http') === 0;
+  const hasUrl = item.url?.startsWith('http');
 
   return (
     <div style={{ marginBottom: settings.listSpacing + 'px' }}>

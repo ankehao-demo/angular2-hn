@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, type ReactNode } from 'react';
 import type { Settings } from '../types/settings';
 
 interface SettingsContextType {
@@ -77,10 +77,12 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('listSpacing', listSpace);
   }, []);
 
+  const contextValue = useMemo(() => ({
+    settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing,
+  }), [settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing]);
+
   return (
-    <SettingsContext.Provider
-      value={{ settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing }}
-    >
+    <SettingsContext.Provider value={contextValue}>
       {children}
     </SettingsContext.Provider>
   );

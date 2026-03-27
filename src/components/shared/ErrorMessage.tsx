@@ -4,7 +4,7 @@ interface ErrorMessageProps {
   message: string;
 }
 
-export function ErrorMessage({ message }: ErrorMessageProps) {
+export function ErrorMessage({ message }: Readonly<ErrorMessageProps>) {
   return (
     <div className="error-section">
       <div className="skull">

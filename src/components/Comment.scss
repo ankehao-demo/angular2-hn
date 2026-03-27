@@ -54,10 +54,15 @@
   }
 }
 
-.collapse {
+button.collapse {
   font-size: 13px;
   letter-spacing: 2px;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
 }
 
 .comment-tree {

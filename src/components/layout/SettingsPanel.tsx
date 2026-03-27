@@ -9,7 +9,7 @@ export function SettingsPanel() {
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={toggleSettings}>&times;</span>
+        <button className="close" onClick={toggleSettings} aria-label="Close settings">&times;</button>
         <div className="content">
           <div className="control-section">
             <h2>Links</h2>
@@ -64,7 +64,7 @@ export function SettingsPanel() {
               <h2>Change Font</h2>
               <div>
                 <label>
-                  Font size:
+                  Font size:{' '}
                   <input
                     min="1"
                     value={settings.titleFontSize}
@@ -76,7 +76,7 @@ export function SettingsPanel() {
               </div>
               <div>
                 <label>
-                  List spacing:
+                  List spacing:{' '}
                   <input
                     min="0"
                     value={settings.listSpacing}

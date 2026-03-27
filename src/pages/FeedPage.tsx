@@ -9,9 +9,9 @@ interface FeedPageProps {
   feedType: string;
 }
 
-export function FeedPage({ feedType }: FeedPageProps) {
+export function FeedPage({ feedType }: Readonly<FeedPageProps>) {
   const { page } = useParams<{ page: string }>();
-  const pageNum = page ? parseInt(page, 10) : 1;
+  const pageNum = page ? Number.parseInt(page, 10) : 1;
   const { data: items, isLoading, error } = useHackerNewsFeed(feedType, pageNum);
   const listStart = ((pageNum - 1) * 30) + 1;
 

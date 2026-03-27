@@ -45,7 +45,10 @@ export default function Header() {
             className="settings"
             src="/assets/images/cog.svg"
             alt="Settings"
+            role="button"
+            tabIndex={0}
             onClick={toggleSettings}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleSettings(); }}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 @import "../../styles/media";
 @import "../../styles/theme_variables";
 
-:global(#header) {
+#header {
   color: #fff;
   padding: 6px 0;
   line-height: 18px;
@@ -103,7 +103,7 @@
     }
   }
 
-  :global(.active) {
+  .active {
     color: #fff;
   }
 }

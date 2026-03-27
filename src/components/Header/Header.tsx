@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSettings } from '../../context/SettingsContext';
 import SettingsPanel from '../Settings/SettingsPanel';
-import styles from './Header.module.scss';
+import './Header.scss';
 
 export default function Header() {
   const { settings, toggleSettings } = useSettings();
@@ -13,15 +13,15 @@ export default function Header() {
       <div id="header">
         <NavLink
           to="/news/1"
-          className={({ isActive }) => `${styles['home-link']}${isActive ? ' active' : ''}`}
+          className={({ isActive }) => `home-link${isActive ? ' active' : ''}`}
           onClick={scrollTop}
         >
-          <div className={styles['logo-inner']}></div>
-          <img className={styles.logo} src="/assets/images/logo.svg" alt="Logo" />
+          <div className="logo-inner"></div>
+          <img className="logo" src="/assets/images/logo.svg" alt="Logo" />
         </NavLink>
-        <div className={styles['header-text']}>
-          <div className={styles.left}>
-            <span className={styles['header-nav']}>
+        <div className="header-text">
+          <div className="left">
+            <span className="header-nav">
               <NavLink to="/newest/1" className={({ isActive }) => isActive ? 'active' : ''} onClick={scrollTop}>
                 new
               </NavLink>
@@ -40,9 +40,9 @@ export default function Header() {
             </span>
           </div>
         </div>
-        <div className={styles.info}>
+        <div className="info">
           <img
-            className={styles.settings}
+            className="settings"
             src="/assets/images/cog.svg"
             alt="Settings"
             onClick={toggleSettings}

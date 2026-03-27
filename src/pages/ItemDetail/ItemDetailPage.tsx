@@ -7,7 +7,7 @@ import type { Story } from '../../models/types';
 import Comment from './Comment';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import styles from './ItemDetailPage.module.scss';
+import './ItemDetailPage.scss';
 
 export default function ItemDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -30,18 +30,18 @@ export default function ItemDetailPage() {
   const hasUrl = item ? item.url && item.url.indexOf('http') === 0 : false;
 
   return (
-    <div className={styles['main-content']}>
+    <div className="main-content">
       {!item && !errorMessage && <Loader />}
       {!item && errorMessage !== '' && <ErrorMessage message={errorMessage} />}
 
       {item && (
-        <div className={styles.item}>
-          <div className={`${styles.mobile} ${styles['item-header']}`}>
-            <p className={styles['title-block']}>
-              <span className={styles['back-button']} onClick={goBack}></span>
+        <div className="item">
+          <div className="mobile item-header">
+            <p className="title-block">
+              <span className="back-button" onClick={goBack}></span>
               {hasUrl ? (
                 <a
-                  className={styles.title}
+                  className="title"
                   href={item.url}
                   target={settings.openLinkInNewTab ? '_blank' : undefined}
                   rel={settings.openLinkInNewTab ? 'noopener' : undefined}
@@ -49,44 +49,44 @@ export default function ItemDetailPage() {
                   {item.title}
                 </a>
               ) : (
-                <Link to={`/item/${item.id}`} className={styles.title}>
+                <Link to={`/item/${item.id}`} className="title">
                   {item.title}
                 </Link>
               )}
             </p>
           </div>
           <div
-            className={`${styles.laptop} ${
-              item.comments_count > 0 || item.type === 'job' ? styles['item-header'] : ''
-            } ${item.text ? styles['head-margin'] : ''}`}
+            className={`laptop ${
+              item.comments_count > 0 || item.type === 'job' ? 'item-header' : ''
+            } ${item.text ? 'head-margin' : ''}`}
           >
             {hasUrl ? (
               <p>
                 <a
-                  className={styles.title}
+                  className="title"
                   href={item.url}
                   target={settings.openLinkInNewTab ? '_blank' : undefined}
                   rel={settings.openLinkInNewTab ? 'noopener' : undefined}
                 >
                   {item.title}
                 </a>
-                {item.domain && <span className={styles.domain}> ({item.domain})</span>}
+                {item.domain && <span className="domain"> ({item.domain})</span>}
               </p>
             ) : (
               <p>
-                <Link to={`/item/${item.id}`} className={styles.title}>
+                <Link to={`/item/${item.id}`} className="title">
                   {item.title}
                 </Link>
               </p>
             )}
-            <div className={styles.subtext}>
+            <div className="subtext">
               {item.type !== 'job' && (
                 <span>
                   {item.points} points by{' '}
                   <Link to={`/user/${item.user}`}>{item.user}</Link>
                 </span>
               )}
-              <span className={item.type !== 'job' ? styles['item-details'] : undefined}>
+              <span className={item.type !== 'job' ? 'item-details' : undefined}>
                 {item.time_ago}
                 {item.type !== 'job' && (
                   <span>
@@ -98,13 +98,13 @@ export default function ItemDetailPage() {
             </div>
           </div>
           {item.type === 'poll' && item.poll && (
-            <div className={styles.pollResults}>
+            <div className="pollResults">
               {item.poll.map((pollResult, i) => (
-                <div key={i} className={styles.pollContent}>
+                <div key={i} className="pollContent">
                   <div dangerouslySetInnerHTML={{ __html: pollResult.content }} />
-                  <div className={styles.subtext}>{pollResult.points} points</div>
+                  <div className="subtext">{pollResult.points} points</div>
                   <div
-                    className={styles.pollBar}
+                    className="pollBar"
                     style={{ width: `${(pollResult.points / item.poll_votes_count) * 100}%` }}
                   />
                 </div>
@@ -112,9 +112,9 @@ export default function ItemDetailPage() {
             </div>
           )}
           {item.content && (
-            <p className={styles.subject} dangerouslySetInnerHTML={{ __html: item.content }} />
+            <p className="subject" dangerouslySetInnerHTML={{ __html: item.content }} />
           )}
-          <ul className={styles['comment-list']}>
+          <ul className="comment-list">
             {item.comments &&
               item.comments.map((comment) => (
                 <li key={comment.id}>

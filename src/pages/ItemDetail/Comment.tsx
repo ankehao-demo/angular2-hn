@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Comment as CommentType } from '../../models/types';
-import styles from './Comment.module.scss';
+import './Comment.scss';
 
 interface CommentProps {
   comment: CommentType;
@@ -13,8 +13,8 @@ export default function Comment({ comment }: CommentProps) {
   if (comment.deleted) {
     return (
       <div>
-        <div className={styles['deleted-meta']}>
-          <span className={styles.collapse}>[deleted]</span> | Comment Deleted
+        <div className="deleted-meta">
+          <span className="collapse">[deleted]</span> | Comment Deleted
         </div>
       </div>
     );
@@ -22,21 +22,21 @@ export default function Comment({ comment }: CommentProps) {
 
   return (
     <div>
-      <div className={`${styles.meta} ${collapse ? styles['meta-collapse'] : ''}`}>
-        <span className={styles.collapse} onClick={() => setCollapse(!collapse)}>
+      <div className={`meta ${collapse ? 'meta-collapse' : ''}`}>
+        <span className="collapse" onClick={() => setCollapse(!collapse)}>
           [{collapse ? '+' : '-'}]
         </span>{' '}
         <Link to={`/user/${comment.user}`}>{comment.user}</Link>
-        <span className={styles.time}>{comment.time_ago}</span>
+        <span className="time">{comment.time_ago}</span>
       </div>
-      <div className={styles['comment-tree']}>
+      <div className="comment-tree">
         {!collapse && (
           <div>
             <p
-              className={styles['comment-text']}
+              className="comment-text"
               dangerouslySetInnerHTML={{ __html: comment.content }}
             />
-            <ul className={styles.subtree}>
+            <ul className="subtree">
               {comment.comments &&
                 comment.comments.map((subComment) => (
                   <li key={subComment.id}>

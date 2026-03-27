@@ -1,19 +1,19 @@
 import { useSettings } from '../../context/SettingsContext';
-import styles from './SettingsPanel.module.scss';
+import './SettingsPanel.scss';
 
 export default function SettingsPanel() {
   const { settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing } = useSettings();
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.popup}>
+    <div className="overlay">
+      <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className={styles.close} onClick={toggleSettings}>
+        <span className="close" onClick={toggleSettings}>
           &times;
         </span>
-        <div className={styles.content}>
-          <div className={styles['control-section']}>
+        <div className="content">
+          <div className="control-section">
             <h2>Links</h2>
             <input
               type="checkbox"
@@ -22,8 +22,8 @@ export default function SettingsPanel() {
             />{' '}
             Open links in a new tab
           </div>
-          <div className={styles['theme-controls']}>
-            <div className={styles['control-section']}>
+          <div className="theme-controls">
+            <div className="control-section">
               <h2>Select a theme</h2>
               <div>
                 <label>
@@ -62,7 +62,7 @@ export default function SettingsPanel() {
                 </label>
               </div>
             </div>
-            <div className={styles['control-section']}>
+            <div className="control-section">
               <h2>Change Font</h2>
               <div>
                 <label>

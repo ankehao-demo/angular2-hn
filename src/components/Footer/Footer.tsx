@@ -1,8 +1,8 @@
-import styles from './Footer.module.scss';
+import './Footer.scss';
 
 export default function Footer() {
   return (
-    <div id="footer" className={styles.footer}>
+    <div id="footer" className="footer">
       <p>
         Show this project some &#10084; on{' '}
         <a href="https://github.com/hdjirdeh/angular2-hn" target="_blank" rel="noopener noreferrer">

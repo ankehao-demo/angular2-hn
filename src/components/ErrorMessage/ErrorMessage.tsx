@@ -1,17 +1,17 @@
-import styles from './ErrorMessage.module.scss';
+import './ErrorMessage.scss';
 
 export default function ErrorMessage({ message }: { message: string }) {
   return (
-    <div className={styles['error-section']}>
-      <div className={styles.skull}>
-        <div className={styles.head}>
-          <div className={styles.crack}></div>
+    <div className="error-section">
+      <div className="skull">
+        <div className="head">
+          <div className="crack"></div>
         </div>
-        <div className={styles.mouth}>
-          <div className={styles.teeth}></div>
+        <div className="mouth">
+          <div className="teeth"></div>
         </div>
       </div>
-      <p className={styles.strong}>{message}</p>
+      <p className="strong">{message}</p>
       <p>If you are offline viewing, you'll need to visit this page with a network connection first before it can work offline.</p>
     </div>
   );

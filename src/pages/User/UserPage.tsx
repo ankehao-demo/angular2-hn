@@ -4,7 +4,7 @@ import { fetchUser } from '../../api/hackerNewsApi';
 import type { User } from '../../models/types';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import styles from './UserPage.module.scss';
+import './UserPage.scss';
 
 export default function UserPage() {
   const { id } = useParams<{ id: string }>();
@@ -29,20 +29,20 @@ export default function UserPage() {
       {!user && errorMessage !== '' && <ErrorMessage message={errorMessage} />}
 
       {user && (
-        <div className={styles.profile}>
-          <div className={`${styles.mobile} ${styles['item-header']}`}>
-            <p className={styles['title-block']}>
-              <span className={styles['back-button']} onClick={goBack}></span>
+        <div className="profile">
+          <div className="mobile item-header">
+            <p className="title-block">
+              <span className="back-button" onClick={goBack}></span>
               Profile: {user.id}
             </p>
           </div>
-          <div className={styles['main-details']}>
-            <span className={styles.name}>{user.id}</span>
-            <span className={styles.right}>{user.karma} &#9733;</span>
-            <p className={styles.age}>Created {user.created}</p>
+          <div className="main-details">
+            <span className="name">{user.id}</span>
+            <span className="right">{user.karma} &#9733;</span>
+            <p className="age">Created {user.created}</p>
           </div>
           {user.about && (
-            <div className={styles['other-details']}>
+            <div className="other-details">
               <p dangerouslySetInnerHTML={{ __html: user.about }} />
             </div>
           )}

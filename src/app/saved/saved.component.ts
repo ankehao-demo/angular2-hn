@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { BookmarkService } from '../shared/services/bookmark.service';
 import { Story } from '../shared/models/story';
@@ -8,12 +9,21 @@ import { Story } from '../shared/models/story';
   templateUrl: './saved.component.html',
   styleUrls: ['./saved.component.scss']
 })
-export class SavedComponent implements OnInit {
+export class SavedComponent implements OnInit, OnDestroy {
   stories: Story[] = [];
+  private _subscription: Subscription;
 
   constructor(private _bookmarkService: BookmarkService) {}
 
   ngOnInit() {
-    this.stories = this._bookmarkService.getSavedStories();
+    this._subscription = this._bookmarkService.bookmarksChanged$.subscribe(stories => {
+      this.stories = stories;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
   }
 }

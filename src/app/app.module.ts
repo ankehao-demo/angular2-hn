@@ -13,9 +13,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HackerNewsAPIService } from './shared/services/hackernews-api.service';
 import { SettingsService } from './shared/services/settings.service';
+import { BookmarkService } from './shared/services/bookmark.service';
+import { SavedComponent } from './saved/saved.component';
 
 @NgModule({
-    declarations: [AppComponent, FeedComponent, ItemComponent],
+    declarations: [AppComponent, FeedComponent, ItemComponent, SavedComponent],
     imports: [
         BrowserModule,
         routing,
@@ -26,7 +28,7 @@ import { SettingsService } from './shared/services/settings.service';
             enabled: environment.production,
         }),
     ],
-    providers: [HackerNewsAPIService, SettingsService],
+    providers: [HackerNewsAPIService, SettingsService, BookmarkService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

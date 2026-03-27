@@ -20,6 +20,9 @@
     <a [routerLink]="['/item', item.id]" routerLinkActive="active" class="comment-number" *ngIf="item.type !== 'job'"> •
       {{item.comments_count | comment }}
     </a>
+    <span class="bookmark-btn" (click)="toggleBookmark()" [class.bookmarked]="isBookmarked()" title="{{isBookmarked() ? 'Remove bookmark' : 'Bookmark this story'}}">
+      {{isBookmarked() ? '★' : '☆'}}
+    </span>
     </div>
   </div>
   <div class="subtext-laptop">
@@ -34,6 +37,9 @@
           {{item.comments_count | comment }}
         </a>
       </span>
+    </span>
+    <span class="bookmark-btn" (click)="toggleBookmark()" [class.bookmarked]="isBookmarked()" title="{{isBookmarked() ? 'Remove bookmark' : 'Bookmark this story'}}">
+      {{isBookmarked() ? '★' : '☆'}}
     </span>
   </div>
 </div>

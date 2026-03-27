@@ -149,3 +149,19 @@ ul {
 li {
   display: list-item;
 }
+
+.bookmark-btn {
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 8px;
+  color: #696969;
+  user-select: none;
+
+  &:hover {
+    color: #f39c12;
+  }
+
+  &.bookmarked {
+    color: #f39c12;
+  }
+}

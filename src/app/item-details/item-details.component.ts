@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { HackerNewsAPIService } from '../shared/services/hackernews-api.service';
 import { SettingsService } from '../shared/services/settings.service';
+import { BookmarkService } from '../shared/services/bookmark.service';
 
 import { Story } from '../shared/models/story';
 import { Settings } from '../shared/models/settings';
@@ -23,6 +24,7 @@ export class ItemDetailsComponent implements OnInit {
   constructor(
     private _hackerNewsAPIService: HackerNewsAPIService,
     private _settingsService: SettingsService,
+    private _bookmarkService: BookmarkService,
     private route: ActivatedRoute,
     private _location: Location
   ) {
@@ -45,6 +47,14 @@ export class ItemDetailsComponent implements OnInit {
 
   get hasUrl(): boolean {
     return this.item.url.indexOf('http') === 0;
+  }
+
+  toggleBookmark(): void {
+    this._bookmarkService.toggleBookmark(this.item);
+  }
+
+  isBookmarked(): boolean {
+    return this._bookmarkService.isBookmarked(this.item.id);
   }
 
 }

@@ -1,0 +1,72 @@
+@import "../../styles/media";
+@import "../../styles/theme_variables";
+
+.feed-content {
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+.feed-list {
+  list-style-type: none;
+  padding: 0 40px;
+  margin: 0;
+
+  @media #{$mobile-only} {
+    padding: 70px 15px 0;
+  }
+}
+
+.feed-item {
+  padding: 5px 0;
+}
+
+.feed-title {
+  margin: 2px 0;
+  font-family: Verdana, Geneva, sans-serif;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.domain {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.subtext {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.pagination {
+  padding: 20px 40px;
+  font-size: 14px;
+
+  @media #{$mobile-only} {
+    padding: 20px 15px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .page-number {
+    font-weight: bold;
+  }
+}

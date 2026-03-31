@@ -1,0 +1,27 @@
+.loader {
+  padding: 40px;
+  text-align: center;
+}
+
+.loader-bar {
+  display: inline-block;
+  width: 50px;
+  height: 4px;
+  background-color: #b92b27;
+  animation: loader 1.2s infinite ease-in-out;
+}
+
+@keyframes loader {
+  0% {
+    transform: scaleX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0);
+    opacity: 0.5;
+  }
+}

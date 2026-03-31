@@ -1,0 +1,95 @@
+@import "../../styles/media";
+
+.feed {
+  padding: 10px 30px;
+}
+
+@media #{$mobile-only} {
+  .feed {
+    padding: 62px 10px 10px 10px;
+  }
+}
+
+.feed-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feed-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+
+  &.compact {
+    padding: 4px 0;
+  }
+}
+
+.feed-item-number {
+  color: #696969;
+  min-width: 30px;
+  text-align: right;
+  margin-right: 10px;
+  font-size: 14px;
+  padding-top: 2px;
+}
+
+.feed-item-content {
+  flex: 1;
+}
+
+.feed-item-title {
+  a {
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.feed-item-domain {
+  font-size: 12px;
+  color: #696969;
+}
+
+.feed-item-meta {
+  font-size: 12px;
+  color: #696969;
+  margin-top: 4px;
+
+  a {
+    color: #696969;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.feed-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  gap: 15px;
+}
+
+.pagination-link {
+  color: #b92b27;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.pagination-page {
+  color: #696969;
+  font-size: 14px;
+}

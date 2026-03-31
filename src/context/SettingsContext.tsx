@@ -19,7 +19,7 @@ function getInitialSettings(): Settings {
             const stored = localStorage.getItem('openLinkInNewTab');
             return stored ? JSON.parse(stored) : false;
         })(),
-        theme: 'default',
+        theme: localStorage.getItem('theme') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'default'),
         titleFontSize: localStorage.getItem('titleFontSize') ?? '16',
         listSpacing: localStorage.getItem('listSpacing') ?? '0',
     };
@@ -32,19 +32,6 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         setSettings((prev) => ({ ...prev, theme }));
         localStorage.setItem('theme', theme);
     }, []);
-
-    // Initialize theme from localStorage or system preference
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setSettings((prev) => ({ ...prev, theme: savedTheme }));
-        } else {
-            const darkColorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-            if (darkColorSchemeMedia.matches) {
-                setTheme('night');
-            }
-        }
-    }, [setTheme]);
 
     // Subscribe to system preferred color scheme changes
     useEffect(() => {

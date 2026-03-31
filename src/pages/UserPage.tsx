@@ -13,17 +13,23 @@ export default function UserPage() {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
+        let ignore = false;
         setUser(null);
         setErrorMessage('');
         if (id) {
             fetchUser(id)
                 .then((data) => {
-                    setUser(data);
+                    if (!ignore) {
+                        setUser(data);
+                    }
                 })
                 .catch(() => {
-                    setErrorMessage('Could not load user ' + id + '.');
+                    if (!ignore) {
+                        setErrorMessage('Could not load user ' + id + '.');
+                    }
                 });
         }
+        return () => { ignore = true; };
     }, [id]);
 
     const goBack = () => {

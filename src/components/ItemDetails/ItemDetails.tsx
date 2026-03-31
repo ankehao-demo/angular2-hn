@@ -32,7 +32,7 @@ export default function ItemDetails() {
 
   const goBack = () => navigate(-1);
 
-  const hasUrl = item ? item.url.indexOf('http') === 0 : false;
+  const hasUrl = item?.url?.indexOf('http') === 0;
 
   return (
     <div className="main-content">

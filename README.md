@@ -1,102 +1,80 @@
-<p align="center">
-  <a href="https://angular2-hn.firebaseapp.com">
-    <img alt="Angular 2 HN" title="Angular 2 HN" src="http://i.imgur.com/J303pQ4.png" width="150">
-  </a>
-</p>
+# React HN
 
-<p align="center">
-  A progressive Hacker News client built with Angular
-</p>
+A progressive Hacker News client built with React, TypeScript, and Vite.
 
-<p align="center">
-  <a href="https://angular2-hn.firebaseapp.com">View App</a>
-</p>
+Migrated from the original [Angular 9 HN PWA](https://github.com/nicholasbraun/angular2-hn).
 
-<p align="center">
-  <a href="/CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
-  <a href="https://travis-ci.org/housseindjirdeh/angular2-hn"><img alt="Build Status" src="https://travis-ci.org/housseindjirdeh/angular2-hn.svg?branch=master"></a>
-</p>
+## Features
 
----
+- **React 19** with TypeScript
+- **Vite** for fast development and optimized builds
+- **React Router v7** for client-side routing
+- **PWA support** via vite-plugin-pwa with service worker
+- **SCSS theming** with support for default, night, and AMOLED black themes
+- **Lazy loading** for ItemDetails and User pages
+- **Settings** for theme, font size, list spacing, and link behavior
+- **Google Analytics** page tracking
 
-:zap: **Fast:** Service Worker App Shell + Dynamic Content model to achieve faster load times with and without a network.
+## Getting Started
 
-:iphone: **Responsive:** Completely responsive UI that can be installed to your mobile home screen to provide a native feel.
+### Prerequisites
 
-:rocket: **Progressive:** [Lighthouse](https://github.com/GoogleChrome/lighthouse) score of 87/100.
+- Node.js 18+
+- npm 9+
 
-<p align="center">
-  <img src = "http://i.imgur.com/fzJzLFO.png" width=500>
-</p>
+### Installation
 
-## Mobile Preview
+```bash
+npm install
+```
 
-<p align="center">
-  <img src = "http://i.imgur.com/ZloA1hn.gif">
-</p>
+### Development
 
-## Laptop Preview
+```bash
+npm run dev
+```
 
-<p align="center">
-  <img src = "http://i.imgur.com/MrKHaln.gif">
-</p>
+### Build
 
-## Offline Support
+```bash
+npm run build
+```
 
-This app uses [Workbox](https://workboxjs.org/) to generate a service worker as part of the build step to load quickly and work offline.
+### Preview Production Build
 
-## Manifest
+```bash
+npm run preview
+```
 
-With Chromium based browsers for Android (Chrome, Opera, etc...), Angular 2 HN includes a Web App Manifest that allows you to install to your homescreen.
+### Lint
 
-<p align="center">
-  <img src = "http://i.imgur.com/1RaaNkr.png">
-</p>
+```bash
+npm run lint
+```
 
-## Themes
+### Test
 
-Built in theme engine!
+```bash
+npm test
+```
 
-Current themes:
-* Default
-* Night
-* Black (AMOLED)
+## Project Structure
 
-More to come!
+```
+src/
+  components/     # Reusable UI components (Header, Footer, Settings, FeedItem, Comment, Loader, ErrorMessage)
+  pages/          # Route-level page components (Feed, ItemDetails, User)
+  hooks/          # Custom hooks (useHackerNewsApi, usePageTracking)
+  context/        # React Context providers (SettingsContext)
+  types/          # TypeScript interfaces and types
+  styles/         # Global SCSS styles and theme system
+  utils/          # Utility functions (formatComment)
+```
 
-## Areas of improvement
+## API
 
- - Realtime updating using the Firebase SDK (may need to add option to settings so service worker can still rely on REST endpoints)
- - Server side rendering
+Uses the [Hacker News API](https://node-hnapi.herokuapp.com) for data fetching.
 
-Feel free to send me feedback on [twitter](https://twitter.com/hdjirdeh) or [file an issue](https://github.com/hdjirdeh/angular2-hn/issues/new)! Feature requests are always welcome.
+## License
 
-## Build process
-
-Note: This project has been ejected (with AOT + production settings) in order to customize Webpack configurations.
-
- - Clone or download the repo
- - `npm install`
- - `npm start` to run the application with webpack-dev-server or `npm build` to kick off a fresh build and update the output directory (`dist/`)
-
-Note: Any Service Worker changes will not be reflected when you run the application locally in development. To test service worker changes:
- - `npm build`
- - `npm run precache` to generate the service worker file
- - `npm run static-serve` to load the application along with the service worker asset using [live-server](https://github.com/tapio/live-server)
-
-## Contributors
-
-A million thanks to some awesome people :)
-
-* [Ashwin Sureshkumar](https://github.com/ashwin-sureshkumar)
-* [Mateusz](https://github.com/mateuszwitkowski)
-* [Jordi Collell](https://github.com/jordic)
-* [Ben Brooks](https://github.com/bbrks)
-* [Zach Berger](https://github.com/zachberger)
-* [blAck PR](https://github.com/blackpr)
-* [Bram Borggreve](https://github.com/beeman)
-* [Antonio Indrianjafy](https://github.com/Antogin)
-* [Addy Osmani](https://github.com/addyosmani)
-* [Majid Hajian](https://github.com/mhadaily)
-* [Jeff Cross](https://github.com/jeffbcross)
-* [Minko Gechev](https://github.com/mgechev)
+[MIT](LICENSE.md)

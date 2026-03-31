@@ -15,9 +15,10 @@ const SettingsContext = createContext<SettingsContextType | undefined>(undefined
 function getInitialSettings(): Settings {
     return {
         showSettings: false,
-        openLinkInNewTab: localStorage.getItem('openLinkInNewTab')
-            ? JSON.parse(localStorage.getItem('openLinkInNewTab')!)
-            : false,
+        openLinkInNewTab: (() => {
+            const stored = localStorage.getItem('openLinkInNewTab');
+            return stored ? JSON.parse(stored) : false;
+        })(),
         theme: 'default',
         titleFontSize: localStorage.getItem('titleFontSize') ?? '16',
         listSpacing: localStorage.getItem('listSpacing') ?? '0',

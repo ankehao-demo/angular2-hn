@@ -53,7 +53,7 @@ export default function ItemDetailsPage() {
                                         className="title"
                                         href={item.url}
                                         target={settings.openLinkInNewTab ? '_blank' : undefined}
-                                        rel={settings.openLinkInNewTab ? 'noopener' : undefined}
+                                        rel={settings.openLinkInNewTab ? 'noopener noreferrer' : undefined}
                                     >
                                         {item.title}
                                     </a>
@@ -75,7 +75,7 @@ export default function ItemDetailsPage() {
                                         className="title"
                                         href={item.url}
                                         target={settings.openLinkInNewTab ? '_blank' : undefined}
-                                        rel={settings.openLinkInNewTab ? 'noopener' : undefined}
+                                        rel={settings.openLinkInNewTab ? 'noopener noreferrer' : undefined}
                                     >
                                         {item.title}
                                     </a>
@@ -118,8 +118,10 @@ export default function ItemDetailsPage() {
                                         <div
                                             className="pollBar"
                                             style={{
-                                                width:
-                                                    (pollResult.points / item.poll_votes_count) * 100 + '%',
+                                                    width:
+                                                        item.poll_votes_count > 0
+                                                            ? (pollResult.points / item.poll_votes_count) * 100 + '%'
+                                                            : '0%',
                                             }}
                                         ></div>
                                     </div>

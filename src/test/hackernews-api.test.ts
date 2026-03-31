@@ -12,6 +12,7 @@ describe('fetchFeed', () => {
     it('fetches feed data for given type and page', async () => {
         const mockStories = [{ id: 1, title: 'Test Story' }];
         mockFetch.mockResolvedValueOnce({
+            ok: true,
             json: () => Promise.resolve(mockStories),
         });
 
@@ -20,12 +21,22 @@ describe('fetchFeed', () => {
         expect(mockFetch).toHaveBeenCalledWith('https://node-hnapi.herokuapp.com/news?page=1');
         expect(result).toEqual(mockStories);
     });
+
+    it('throws on non-ok response', async () => {
+        mockFetch.mockResolvedValueOnce({
+            ok: false,
+            status: 500,
+        });
+
+        await expect(fetchFeed('news', 1)).rejects.toThrow('Failed to fetch news feed (status 500)');
+    });
 });
 
 describe('fetchItemContent', () => {
     it('fetches item content by id', async () => {
         const mockStory = { id: 123, title: 'Test', type: 'story', comments: [] };
         mockFetch.mockResolvedValueOnce({
+            ok: true,
             json: () => Promise.resolve(mockStory),
         });
 
@@ -47,9 +58,9 @@ describe('fetchItemContent', () => {
         const pollOption2 = { points: 20, content: 'Option 2' };
 
         mockFetch
-            .mockResolvedValueOnce({ json: () => Promise.resolve(mockPoll) })
-            .mockResolvedValueOnce({ json: () => Promise.resolve(pollOption1) })
-            .mockResolvedValueOnce({ json: () => Promise.resolve(pollOption2) });
+            .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(mockPoll) })
+            .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(pollOption1) })
+            .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(pollOption2) });
 
         const result = await fetchItemContent(200);
 
@@ -63,6 +74,7 @@ describe('fetchUser', () => {
     it('fetches user data by id', async () => {
         const mockUser = { id: 'testuser', karma: 100 };
         mockFetch.mockResolvedValueOnce({
+            ok: true,
             json: () => Promise.resolve(mockUser),
         });
 

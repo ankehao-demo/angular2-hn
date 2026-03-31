@@ -1,0 +1,25 @@
+// Theme color variables
+$themes: (
+  default: (
+    bg-color: #f5f5f5,
+    text-color: #333,
+    header-bg: #b92b27,
+    header-text: #fff,
+    link-color: #333,
+    meta-color: #696969,
+    border-color: #e0e0e0,
+    card-bg: #fff,
+    settings-bg: #fff,
+  ),
+  dark: (
+    bg-color: #303030,
+    text-color: #e0e0e0,
+    header-bg: #b92b27,
+    header-text: #fff,
+    link-color: #e0e0e0,
+    meta-color: #999,
+    border-color: #505050,
+    card-bg: #424242,
+    settings-bg: #424242,
+  ),
+);

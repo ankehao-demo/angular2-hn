@@ -1,0 +1,92 @@
+@import "../../styles/media";
+
+.header {
+  background-color: #b92b27;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 52px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.nav-links {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+}
+
+.nav-link {
+  color: hsla(0, 0%, 100%, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &:hover,
+  &.active {
+    color: #fff;
+  }
+}
+
+.settings-toggle {
+  background: none;
+  border: none;
+  color: hsla(0, 0%, 100%, 0.8);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.settings-panel {
+  background: #fff;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+
+  .setting-item {
+    padding: 5px 0;
+
+    label {
+      font-size: 14px;
+      color: #333;
+    }
+
+    select {
+      margin-left: 8px;
+    }
+  }
+}
+
+@media #{$mobile-only} {
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
+}

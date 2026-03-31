@@ -1,0 +1,80 @@
+@import 'theme_variables';
+
+.theme-default {
+  background-color: $default-bg;
+  color: $default-text;
+
+  a {
+    color: $default-link;
+  }
+
+  .header {
+    background-color: $default-header-bg;
+    color: $default-header-text;
+
+    a {
+      color: $default-header-text;
+    }
+  }
+
+  .post {
+    border-bottom-color: #cececb;
+  }
+
+  .domain {
+    color: #696969;
+  }
+}
+
+.theme-night {
+  background-color: $night-bg;
+  color: $night-text;
+
+  a {
+    color: $night-link;
+  }
+
+  .header {
+    background-color: $night-header-bg;
+    color: $night-header-text;
+
+    a {
+      color: $night-header-text;
+    }
+  }
+
+  .post {
+    border-bottom-color: #505050;
+  }
+
+  .domain {
+    color: #888;
+  }
+}
+
+.theme-amoledblack {
+  background-color: $amoledblack-bg;
+  color: $amoledblack-text;
+
+  a {
+    color: $amoledblack-link;
+  }
+
+  .header {
+    background-color: $amoledblack-header-bg;
+    color: $amoledblack-header-text;
+    border-bottom: 1px solid #333;
+
+    a {
+      color: $amoledblack-header-text;
+    }
+  }
+
+  .post {
+    border-bottom-color: #333;
+  }
+
+  .domain {
+    color: #888;
+  }
+}

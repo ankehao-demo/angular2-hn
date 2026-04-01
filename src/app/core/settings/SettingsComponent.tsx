@@ -34,6 +34,22 @@ interface SettingsComponentProps {
  * Provides a UI for adjusting application settings such as theme,
  * font size, and link behavior. This is a 1:1 migration of the
  * Angular component located at src/app/core/settings/settings.component.ts.
+ *
+ * TODO: The parent component should conditionally render this based on settings.showSettings
+ * TODO: Theme changes trigger global CSS class changes at the app level (not handled here)
+ * TODO: Styles rely on Angular SCSS build pipeline — may need CSS module or import adjustments
+ *       when React build tooling is integrated
+ *
+ * Usage with useSettingsService hook:
+ *   const { settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing } = useSettingsService();
+ *   <SettingsComponent
+ *     settings={settings}
+ *     onToggleSettings={toggleSettings}
+ *     onToggleOpenLinksInNewTab={toggleOpenLinksInNewTab}
+ *     onSelectTheme={setTheme}
+ *     onChangeTitleFont={setFont}
+ *     onChangeSpacing={setSpacing}
+ *   />
  */
 export const SettingsComponent: React.FC<SettingsComponentProps> = ({
   settings,

@@ -93,9 +93,14 @@ export const SettingsComponent: React.FC<SettingsComponentProps> = ({
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={closeSettings}>
+        <button
+          className="close"
+          type="button"
+          aria-label="Close settings"
+          onClick={closeSettings}
+        >
           &times;
-        </span>
+        </button>
         <div className="content">
           {/* Links section */}
           <div className="control-section">
@@ -155,7 +160,7 @@ export const SettingsComponent: React.FC<SettingsComponentProps> = ({
               <h2>Change Font</h2>
               <div>
                 <label>
-                  Font size:
+                  <span>Font size:</span>
                   <input
                     min={1}
                     defaultValue={settings.titleFontSize}
@@ -167,7 +172,7 @@ export const SettingsComponent: React.FC<SettingsComponentProps> = ({
               </div>
               <div>
                 <label>
-                  List spacing:
+                  <span>List spacing:</span>
                   <input
                     min={0}
                     defaultValue={settings.listSpacing}

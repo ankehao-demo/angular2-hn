@@ -72,5 +72,99 @@ export const SettingsComponent: React.FC<SettingsComponentProps> = ({
     [onChangeSpacing]
   );
 
-  return null;
+  return (
+    <div id="popup1" className="overlay">
+      <div className="popup">
+        <h1>Settings</h1>
+        <hr />
+        <span className="close" onClick={closeSettings}>
+          &times;
+        </span>
+        <div className="content">
+          {/* Links section */}
+          <div className="control-section">
+            <h2>Links</h2>
+            <input
+              type="checkbox"
+              checked={settings.openLinkInNewTab}
+              onChange={handleToggleOpenLinksInNewTab}
+            />{' '}
+            Open links in a new tab
+          </div>
+
+          <div className="theme-controls">
+            {/* Theme selection */}
+            <div className="control-section">
+              <h2>Select a theme</h2>
+              <div>
+                <label>
+                  <input
+                    name="theme"
+                    type="radio"
+                    value="default"
+                    checked={settings.theme === 'default'}
+                    onChange={() => handleSelectTheme('default')}
+                  />{' '}
+                  Default
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input
+                    name="theme"
+                    type="radio"
+                    value="night"
+                    checked={settings.theme === 'night'}
+                    onChange={() => handleSelectTheme('night')}
+                  />{' '}
+                  Night
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input
+                    name="theme"
+                    type="radio"
+                    value="amoledblack"
+                    checked={settings.theme === 'amoledblack'}
+                    onChange={() => handleSelectTheme('amoledblack')}
+                  />{' '}
+                  Black (AMOLED)
+                </label>
+              </div>
+            </div>
+
+            {/* Font and spacing controls */}
+            <div className="control-section">
+              <h2>Change Font</h2>
+              <div>
+                <label>
+                  Font size:
+                  <input
+                    min={1}
+                    defaultValue={settings.titleFontSize}
+                    name="titleFont"
+                    type="number"
+                    onKeyUp={handleChangeTitleFont}
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  List spacing:
+                  <input
+                    min={0}
+                    defaultValue={settings.listSpacing}
+                    name="listSpacing"
+                    type="number"
+                    onKeyUp={handleChangeSpacing}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };

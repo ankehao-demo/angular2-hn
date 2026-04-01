@@ -17,15 +17,18 @@ export default function ItemDetails() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    let ignore = false;
     setItem(null);
     setErrorMessage('');
     window.scrollTo(0, 0);
 
     if (id) {
       fetchItemContent(Number(id))
-        .then(setItem)
-        .catch(() => setErrorMessage('Could not load item comments.'));
+        .then((data) => { if (!ignore) setItem(data); })
+        .catch(() => { if (!ignore) setErrorMessage('Could not load item comments.'); });
     }
+
+    return () => { ignore = true; };
   }, [id]);
 
   const goBack = () => navigate(-1);

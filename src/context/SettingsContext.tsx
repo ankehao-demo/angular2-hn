@@ -18,7 +18,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     return stored ? JSON.parse(stored) : false;
   });
   const [theme, setThemeState] = useState(() => {
-    return localStorage.getItem('theme') || '';
+    return localStorage.getItem('theme') || 'default';
   });
   const [titleFontSize, setTitleFontSize] = useState(() => {
     return localStorage.getItem('titleFontSize') || '16';

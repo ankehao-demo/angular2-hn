@@ -1,0 +1,42 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { SettingsProvider, useSettings } from './context/SettingsContext';
+import { Header } from './components/Header/Header';
+import { Footer } from './components/Footer/Footer';
+import { Feed } from './components/Feed/Feed';
+
+function AppContent() {
+    const { settings } = useSettings();
+
+    return (
+        <div className={settings.theme}>
+            <div className="body-cover">
+                <div className="wrapper">
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<Navigate to="/news/1" replace />} />
+                        <Route path="/news/:page" element={<Feed feedType="news" />} />
+                        <Route path="/newest/:page" element={<Feed feedType="newest" />} />
+                        <Route path="/show/:page" element={<Feed feedType="show" />} />
+                        <Route path="/ask/:page" element={<Feed feedType="ask" />} />
+                        <Route path="/jobs/:page" element={<Feed feedType="jobs" />} />
+                        <Route path="/item/:id" element={<div>Item details placeholder</div>} />
+                        <Route path="/user/:id" element={<div>User profile placeholder</div>} />
+                    </Routes>
+                    <Footer />
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <BrowserRouter>
+            <SettingsProvider>
+                <AppContent />
+            </SettingsProvider>
+        </BrowserRouter>
+    );
+}
+
+export default App;

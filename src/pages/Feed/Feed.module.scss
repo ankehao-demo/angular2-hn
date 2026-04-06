@@ -1,0 +1,41 @@
+@import '../../styles/themes';
+@import '../../styles/media';
+
+.feed {
+  min-height: 400px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  gap: 15px;
+  font-size: 13px;
+
+  a {
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 3px;
+
+    @include themify() {
+      color: themed('linkColor');
+      border: 1px solid themed('itemBorder');
+    }
+
+    &:hover {
+      @include themify() {
+        background-color: themed('settingsBg');
+      }
+    }
+  }
+}
+
+.pageInfo {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+
+  @include themify() {
+    color: themed('secondaryFontColor');
+  }
+}

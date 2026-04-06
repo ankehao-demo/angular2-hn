@@ -1,0 +1,86 @@
+@import 'themeVariables';
+@import 'media';
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+}
+
+.appLoader {
+  text-align: center;
+  padding-top: calc(50vh - 120px);
+
+  .logo {
+    width: 80px;
+    display: inline-block;
+    -webkit-animation-name: logo-spin;
+    animation-name: logo-spin;
+    -webkit-animation-duration: 750ms;
+    animation-duration: 750ms;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+  }
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.bodyCover {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.wrapper {
+  max-width: 900px;
+  margin: 10px auto;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+
+  @media #{$mobile-only} {
+    margin: 0;
+  }
+}
+
+// Theme-specific styles for body cover, wrapper and fonts
+.default {
+  .bodyCover {
+    background-color: $default-bg-color;
+  }
+  .wrapper {
+    background-color: $default-wrapper-bg;
+  }
+  color: $default-font-color;
+}
+
+.night {
+  .bodyCover {
+    background-color: $night-bg-color;
+  }
+  .wrapper {
+    background-color: $night-wrapper-bg;
+  }
+  color: $night-font-color;
+}
+
+.amoledblack {
+  .bodyCover {
+    background-color: $amoledblack-bg-color;
+  }
+  .wrapper {
+    background-color: $amoledblack-wrapper-bg;
+  }
+  color: $amoledblack-font-color;
+}

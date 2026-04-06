@@ -1,0 +1,21 @@
+@import '../../styles/themes';
+
+.footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 12px;
+
+  @include themify() {
+    color: themed('secondaryFontColor');
+  }
+
+  a {
+    @include themify() {
+      color: themed('linkColor');
+    }
+  }
+
+  .heart {
+    color: #b92b27;
+  }
+}

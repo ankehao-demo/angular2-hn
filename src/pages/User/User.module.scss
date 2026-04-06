@@ -1,0 +1,67 @@
+@import '../../styles/themes';
+@import '../../styles/media';
+
+.userProfile {
+  padding: 15px;
+
+  @media #{$mobile-only} {
+    padding: 10px;
+  }
+}
+
+.userId {
+  font-size: 20px;
+  margin: 0 0 15px 0;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+}
+
+.userInfo {
+  font-size: 14px;
+  line-height: 1.8;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+}
+
+.label {
+  font-weight: bold;
+  display: inline-block;
+  min-width: 80px;
+
+  @include themify() {
+    color: themed('secondaryFontColor');
+  }
+}
+
+.about {
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+
+  a {
+    @include themify() {
+      color: themed('linkColor');
+    }
+  }
+}
+
+.link {
+  @include themify() {
+    color: themed('linkColor');
+  }
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

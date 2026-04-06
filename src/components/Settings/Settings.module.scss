@@ -1,0 +1,102 @@
+@import '../../styles/themes';
+@import '../../styles/media';
+
+.settings {
+  padding: 10px 15px;
+  font-size: 13px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+
+  @include themify() {
+    background-color: themed('settingsBg');
+    color: themed('fontColor');
+  }
+
+  &.open {
+    max-height: 300px;
+    padding: 10px 15px;
+  }
+}
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+
+  @media #{$mobile-only} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.settingLabel {
+  width: 180px;
+  font-weight: bold;
+  flex-shrink: 0;
+
+  @media #{$mobile-only} {
+    width: auto;
+    margin-bottom: 3px;
+  }
+}
+
+.themeButtons {
+  display: flex;
+  gap: 5px;
+}
+
+.themeButton {
+  border: 1px solid #ccc;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+  background: transparent;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+
+  &.active {
+    @include themify() {
+      background-color: themed('headerBg');
+      color: themed('headerLink');
+      border-color: themed('headerBg');
+    }
+  }
+}
+
+.rangeInput {
+  width: 150px;
+
+  @media #{$mobile-only} {
+    width: 100%;
+  }
+}
+
+.rangeValue {
+  margin-left: 8px;
+  min-width: 30px;
+}
+
+.toggleButton {
+  border: 1px solid #ccc;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+  background: transparent;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+
+  &.active {
+    @include themify() {
+      background-color: themed('headerBg');
+      color: themed('headerLink');
+      border-color: themed('headerBg');
+    }
+  }
+}

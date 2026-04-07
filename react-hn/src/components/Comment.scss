@@ -1,0 +1,58 @@
+@import "../styles/media";
+@import "../styles/theme_variables";
+
+.comment-tree {
+  margin-bottom: 5px;
+}
+
+.comment {
+  padding: 5px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+
+  .meta {
+    margin-bottom: 5px;
+    font-size: 12px;
+    .user {
+      font-weight: bold;
+      margin-right: 6px;
+    }
+    .time-ago {
+      margin-right: 6px;
+      opacity: 0.7;
+    }
+    .collapse-btn {
+      cursor: pointer;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .comment-content {
+    p {
+      margin: 0 0 10px 0;
+    }
+    a {
+      word-break: break-all;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+  }
+
+  .deleted {
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  .child-comments {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+}

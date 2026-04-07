@@ -17,7 +17,7 @@ function AppContent() {
 
   return (
     <div className={settings.theme}>
-      <div className={styles['body-cover']}></div>
+      <div className={`${styles['body-cover']} body-cover`}></div>
       <div className={`${styles.wrapper} wrapper`}>
         <Header />
         <Suspense fallback={<Loader />}>

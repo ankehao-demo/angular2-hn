@@ -1,0 +1,53 @@
+@import "../styles/media";
+@import "../styles/theme_variables";
+
+.user-details {
+  padding: 10px 20px;
+
+  @media #{$mobile-only} {
+    padding: 70px 15px 10px;
+  }
+}
+
+.user-info {
+  table {
+    border-collapse: collapse;
+    font-size: 14px;
+
+    td {
+      padding: 5px 10px;
+      vertical-align: top;
+    }
+
+    .label {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .about {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      max-width: 600px;
+      line-height: 1.5;
+
+      a {
+        word-break: break-all;
+      }
+    }
+  }
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

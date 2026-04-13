@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { Settings } from '../models/settings';
+import type { Settings } from '../models/settings';
 
 export interface SettingsContextType {
   settings: Settings;

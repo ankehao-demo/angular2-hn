@@ -1,5 +1,5 @@
 import { useState, useEffect, type ReactNode } from 'react';
-import { Settings } from '../models/settings';
+import type { Settings } from '../models/settings';
 import { SettingsContext } from './settingsContextDef';
 
 const defaultSettings: Settings = {

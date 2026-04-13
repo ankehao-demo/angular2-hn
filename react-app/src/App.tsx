@@ -5,15 +5,19 @@ import Feed from './pages/Feed';
 import ItemDetails from './pages/ItemDetails';
 import UserProfile from './pages/UserProfile';
 import { SettingsProvider } from './context/SettingsContext';
+import { useSettings } from './context/useSettings';
 import './styles.scss';
 import './App.scss';
 
-function App() {
+function AppContent() {
+  const { settings } = useSettings();
+
   return (
-    <SettingsProvider>
+    <div className={settings.theme}>
+      <div className="body-cover" />
       <BrowserRouter>
-        <Header />
         <div className="wrapper">
+          <Header />
           <Routes>
             <Route path="/" element={<Navigate to="/news/1" />} />
             <Route path="/news/:page" element={<Feed feedType="news" />} />
@@ -24,9 +28,17 @@ function App() {
             <Route path="/item/:id" element={<ItemDetails />} />
             <Route path="/user/:id" element={<UserProfile />} />
           </Routes>
+          <Footer />
         </div>
-        <Footer />
       </BrowserRouter>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <SettingsProvider>
+      <AppContent />
     </SettingsProvider>
   );
 }

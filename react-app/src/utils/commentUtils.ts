@@ -1,4 +1,4 @@
-import { Comment } from '../models/comment';
+import type { Comment } from '../models/comment';
 
 /**
  * Flatten nested comments into a single array with level information preserved.

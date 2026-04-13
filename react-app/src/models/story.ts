@@ -1,6 +1,6 @@
-import { Comment } from './comment';
-import { FeedType } from './feed-type';
-import { PollResult } from './poll-result';
+import type { Comment } from './comment';
+import type { FeedType } from './feed-type';
+import type { PollResult } from './poll-result';
 
 export interface Story {
   id: number;

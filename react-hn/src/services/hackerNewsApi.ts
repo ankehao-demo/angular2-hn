@@ -5,15 +5,24 @@ const BASE_URL = 'https://node-hnapi.herokuapp.com';
 
 export async function fetchFeed(feedType: string, page: number): Promise<Story[]> {
   const res = await fetch(`${BASE_URL}/${feedType}?page=${page}`);
-  return res.json();
+  if (!res.ok) {
+    throw new Error(`Failed to fetch feed: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<Story[]>;
 }
 
 export async function fetchItemContent(id: number): Promise<Story> {
   const res = await fetch(`${BASE_URL}/item/${id}`);
-  return res.json();
+  if (!res.ok) {
+    throw new Error(`Failed to fetch item: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<Story>;
 }
 
 export async function fetchUser(id: string): Promise<User> {
   const res = await fetch(`${BASE_URL}/user/${id}`);
-  return res.json();
+  if (!res.ok) {
+    throw new Error(`Failed to fetch user: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<User>;
 }

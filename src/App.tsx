@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { SettingsProvider, useSettings } from './context/SettingsContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Settings from './components/Settings';
 import Loader from './components/Loader';
 import FeedPage from './pages/FeedPage';
 import './styles/app.scss';
@@ -33,6 +34,7 @@ function AppContent() {
         <div className="body-cover"></div>
         <div className="wrapper">
           <Header />
+          <Settings />
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<Navigate to="/news/1" replace />} />

@@ -28,6 +28,15 @@ pre {
   z-index: -1;
 }
 
+#root:empty + .app-loader {
+  opacity: 1;
+  z-index: 100;
+}
+
+#root:empty + .app-loader .logo {
+  width: 20vh;
+}
+
 @media screen and (max-width: 768px) {
   .app-loader {
     background-color: #fff;

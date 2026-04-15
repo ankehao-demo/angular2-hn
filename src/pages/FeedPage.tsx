@@ -20,16 +20,22 @@ export default function FeedPage() {
   const effectiveFeedType = VALID_FEEDS.includes(feedType) ? feedType : 'news';
 
   useEffect(() => {
+    let stale = false;
     setItems(null);
     setErrorMessage('');
     fetchFeed(effectiveFeedType, pageNum)
       .then((data) => {
-        setItems(data);
-        window.scrollTo(0, 0);
+        if (!stale) {
+          setItems(data);
+          window.scrollTo(0, 0);
+        }
       })
       .catch(() => {
-        setErrorMessage(`Could not load ${effectiveFeedType} stories.`);
+        if (!stale) {
+          setErrorMessage(`Could not load ${effectiveFeedType} stories.`);
+        }
       });
+    return () => { stale = true; };
   }, [effectiveFeedType, pageNum]);
 
   return (

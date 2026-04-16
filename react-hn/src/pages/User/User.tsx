@@ -31,7 +31,7 @@ const User: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="user-page">
       {!user && !errorMessage && <Loader />}
       {!user && errorMessage !== '' && <ErrorMessage message={errorMessage} />}
 
@@ -55,7 +55,7 @@ const User: React.FC = () => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

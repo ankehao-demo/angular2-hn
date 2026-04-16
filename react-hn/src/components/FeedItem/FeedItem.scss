@@ -1,7 +1,8 @@
 @import "../../scss/media";
 @import "../../scss/theme_variables";
 
-p {
+.feed-item {
+  p {
     margin: 2px 0;
 
     @media #{$mobile-only} {
@@ -14,6 +15,7 @@ p {
     cursor: pointer;
     text-decoration: none;
   }
+}
 
   .title {
     font-size: 16px;

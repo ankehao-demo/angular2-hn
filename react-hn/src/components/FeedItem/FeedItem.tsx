@@ -15,7 +15,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   const hasUrl = item.url && item.url.indexOf('http') === 0;
 
   return (
-    <div style={{ marginBottom: settings.listSpacing + 'px' }}>
+    <div className="feed-item" style={{ marginBottom: settings.listSpacing + 'px' }}>
       {hasUrl ? (
         <p>
           <a
@@ -27,7 +27,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           >
             {item.title}
           </a>
-          {item.domain && <span className="domain">({item.domain})</span>}
+          {item.domain && <>{' '}<span className="domain">({item.domain})</span></>}
         </p>
       ) : (
         <p>
@@ -50,11 +50,10 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           </div>
         )}
         <div className="details">
-          {item.time_ago}
+          {' '}{item.time_ago}
           {item.type !== 'job' && (
             <Link to={`/item/${item.id}`} className="comment-number">
-              {' '}•{' '}
-              {formatComment(item.comments_count)}
+              {' '}• {formatComment(item.comments_count)}
             </Link>
           )}
         </div>
@@ -67,11 +66,10 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           </span>
         )}
         <span className={item.type !== 'job' ? 'item-details' : ''}>
-          {item.time_ago}
+          {' '}{item.time_ago}
           {item.type !== 'job' && (
             <span>
-              {' '}|{' '}
-              <Link to={`/item/${item.id}`}>
+              {' '}| <Link to={`/item/${item.id}`}>
                 {formatComment(item.comments_count)}
               </Link>
             </span>

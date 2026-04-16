@@ -38,7 +38,7 @@ const ItemDetails: React.FC = () => {
   const hasUrl = item ? item.url && item.url.indexOf('http') === 0 : false;
 
   return (
-    <div className="main-content">
+    <div className="main-content item-details-page">
       {!item && !errorMessage && <Loader />}
       {!item && errorMessage !== '' && <ErrorMessage message={errorMessage} />}
 
@@ -66,7 +66,7 @@ const ItemDetails: React.FC = () => {
           <div
             className={`laptop ${
               item.comments_count > 0 || item.type === 'job' ? 'item-header' : ''
-            } ${item.content ? 'head-margin' : ''}`}
+            } ${(item as any).text ? 'head-margin' : ''}`}
           >
             {hasUrl ? (
               <p>
@@ -78,7 +78,7 @@ const ItemDetails: React.FC = () => {
                 >
                   {item.title}
                 </a>
-                {item.domain && <span className="domain">({item.domain})</span>}
+                {item.domain && <span className="domain"> ({item.domain})</span>}
               </p>
             ) : (
               <p>
@@ -95,11 +95,10 @@ const ItemDetails: React.FC = () => {
                 </span>
               )}
               <span className={item.type !== 'job' ? 'item-details' : ''}>
-                {item.time_ago}
+                {' '}{item.time_ago}
                 {item.type !== 'job' && (
                   <span>
-                    {' '}|{' '}
-                    <Link to={`/item/${item.id}`}>
+                    {' '}| <Link to={`/item/${item.id}`}>
                       {formatComment(item.comments_count)}
                     </Link>
                   </span>
@@ -123,12 +122,10 @@ const ItemDetails: React.FC = () => {
               ))}
             </div>
           )}
-          {item.content && (
-            <p
-              className="subject"
-              dangerouslySetInnerHTML={{ __html: item.content }}
-            />
-          )}
+          <p
+            className="subject"
+            dangerouslySetInnerHTML={{ __html: item.content || '' }}
+          />
           <ul className="comment-list">
             {item.comments &&
               item.comments.map((comment) => (

@@ -35,18 +35,36 @@
   margin-bottom: 15px;
 }
 
-p {
-  margin: 2px 0;
+// Scope p/a/ul/li rules to direct template areas only (ViewEncapsulation).
+// In Angular, ViewEncapsulation scopes these rules to only the template elements
+// of ItemDetailsComponent. They do NOT cascade into child components like Comment.
+.item-details-page {
+  > .item > .laptop p,
+  > .item > .mobile p {
+    margin: 2px 0;
+  }
+
+  > .item > .laptop a,
+  > .item > .mobile a,
+  > .item > .subtext a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  // Scope ul/li to only the comment-list (template element), not .subtree inside Comment
+  > .item > .comment-list {
+    list-style-type: none;
+    padding: 10px 0;
+  }
+
+  > .item > .comment-list > li {
+    display: list-item;
+  }
 }
 
 .subject {
   word-wrap: break-word;
-  margin-top: 20px;
-}
-
-a {
-  cursor: pointer;
-  text-decoration: none;
+  margin: 20px 0 2px;
 }
 
 @media #{$mobile-only} {
@@ -139,13 +157,4 @@ a {
     height: 10px;
     margin-bottom: 1em;
   }
-}
-
-ul {
-  list-style-type: none;
-  padding: 10px 0;
-}
-
-li {
-  display: list-item;
 }

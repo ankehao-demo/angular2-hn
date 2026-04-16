@@ -12,7 +12,7 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
 
   if (comment.deleted) {
     return (
-      <div>
+      <div className="comment-wrapper">
         <div className="deleted-meta">
           <span className="collapse">[deleted]</span> | Comment Deleted
         </div>
@@ -21,12 +21,11 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
   }
 
   return (
-    <div>
+    <div className="comment-wrapper">
       <div className={`meta ${collapse ? 'meta-collapse' : ''}`}>
         <span className="collapse" onClick={() => setCollapse(!collapse)}>
           [{collapse ? '+' : '-'}]
-        </span>{' '}
-        <Link to={`/user/${comment.user}`}>{comment.user}</Link>
+        </span><Link to={`/user/${comment.user}`}>{comment.user}</Link>
         <span className="time">{comment.time_ago}</span>
       </div>
       <div className="comment-tree">

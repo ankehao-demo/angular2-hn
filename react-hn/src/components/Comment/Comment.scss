@@ -1,10 +1,22 @@
 @import "../../scss/media";
 @import "../../scss/theme_variables";
 
-a {
-  font-weight: bold;
-  text-decoration: none;
-  &:hover {
+// In Angular, <app-comment> is a custom element with display: inline by default.
+// We replicate that here so the wrapper doesn't add extra block spacing.
+.comment-wrapper {
+  display: inline;
+
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Restore browser defaults for innerHTML content links inside .comment-text
+  .comment-text a {
+    font-weight: normal;
     text-decoration: underline;
   }
 }

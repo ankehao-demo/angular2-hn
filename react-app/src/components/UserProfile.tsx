@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import { fetchUser } from '../services/hackernews-api';
 import { UserProfile as UserProfileType } from '../models/user-profile';
 
@@ -29,7 +30,7 @@ function UserProfile() {
         {user.about && (
           <div className="user-about">
             <strong>About:</strong>
-            <div dangerouslySetInnerHTML={{ __html: user.about }} />
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(user.about) }} />
           </div>
         )}
       </div>

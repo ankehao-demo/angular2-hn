@@ -11,7 +11,16 @@ export async function fetchFeed(feedType: FeedType, page: number = 1): Promise<S
   return response.json();
 }
 
-export async function fetchItemContent(id: number): Promise<Story & { comments: Comment[] }> {
+interface CommentData {
+  id: number;
+  user: string;
+  time_ago: string;
+  content: string;
+  comments: CommentData[];
+  level: number;
+}
+
+export async function fetchItemContent(id: number): Promise<Story & { comments: CommentData[] }> {
   const response = await fetch(`${API_BASE}/item/${id}`);
   if (!response.ok) throw new Error(`Failed to fetch item ${id}`);
   return response.json();

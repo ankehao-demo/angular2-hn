@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import { fetchItemContent } from '../services/hackernews-api';
 import CommentItem from './CommentItem';
 
@@ -62,7 +63,7 @@ function ItemDetails() {
         </div>
       </div>
       {item.content && (
-        <div className="item-content" dangerouslySetInnerHTML={{ __html: item.content }} />
+        <div className="item-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.content) }} />
       )}
       <div className="comments-section">
         <h3>{item.comments_count} comments</h3>

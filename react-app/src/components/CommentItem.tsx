@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 interface CommentData {
   id: number;
@@ -28,7 +29,7 @@ function CommentItem({ comment }: Props) {
       </div>
       {!collapsed && (
         <>
-          <div className="comment-content" dangerouslySetInnerHTML={{ __html: comment.content }} />
+          <div className="comment-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(comment.content) }} />
           {comment.comments && comment.comments.map((child) => (
             <CommentItem key={child.id} comment={child} />
           ))}

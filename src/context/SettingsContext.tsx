@@ -32,10 +32,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
-      if (e.matches && settings.theme === 'default') {
-        setSettings((prev) => ({ ...prev, theme: 'night' }));
-        localStorage.setItem('theme', 'night');
-      }
+      const theme = e.matches ? 'night' : 'default';
+      setSettings((prev) => ({ ...prev, theme }));
+      localStorage.setItem('theme', theme);
     };
 
     if (darkModeMediaQuery.matches && !localStorage.getItem('theme')) {
@@ -45,7 +44,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
     darkModeMediaQuery.addEventListener('change', handleChange);
     return () => darkModeMediaQuery.removeEventListener('change', handleChange);
-  }, [settings.theme]);
+  }, []);
 
   const toggleSettings = useCallback(() => {
     setSettings((prev) => ({ ...prev, showSettings: !prev.showSettings }));

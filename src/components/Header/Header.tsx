@@ -1,17 +1,18 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSettings } from '../../context/SettingsContext';
 import styles from './Header.module.scss';
 
 const navItems = [
-  { path: '/news/1', label: 'top' },
-  { path: '/newest/1', label: 'new' },
-  { path: '/show/1', label: 'show' },
-  { path: '/ask/1', label: 'ask' },
-  { path: '/jobs/1', label: 'jobs' },
+  { path: '/news/1', prefix: '/news/', label: 'top' },
+  { path: '/newest/1', prefix: '/newest/', label: 'new' },
+  { path: '/show/1', prefix: '/show/', label: 'show' },
+  { path: '/ask/1', prefix: '/ask/', label: 'ask' },
+  { path: '/jobs/1', prefix: '/jobs/', label: 'jobs' },
 ];
 
 export default function Header() {
   const { toggleSettings } = useSettings();
+  const location = useLocation();
 
   return (
     <header className={styles.header}>
@@ -24,8 +25,8 @@ export default function Header() {
           <NavLink
             key={item.path}
             to={item.path}
-            className={({ isActive }) =>
-              `${styles.navLink} ${isActive ? styles.activeLink : ''}`
+            className={
+              `${styles.navLink} ${location.pathname.startsWith(item.prefix) ? styles.activeLink : ''}`
             }
           >
             {item.label}

@@ -1,0 +1,84 @@
+@import 'themeVariables';
+
+@mixin themify($themes: (default, night, amoledblack)) {
+  @each $theme in $themes {
+    .#{$theme} & {
+      $theme-map: () !global;
+
+      @if $theme == 'default' {
+        $theme-map: (
+          loaderColor: $default-loader-color,
+          headerBg: $default-header-bg,
+          headerBgActive: $default-header-bg-active,
+          fontColor: $default-font-color,
+          bgColor: $default-bg-color,
+          wrapperBg: $default-wrapper-bg,
+          headerLink: $default-header-link,
+          secondaryFontColor: $default-secondary-font-color,
+          headerBorder: $default-header-border,
+          settingsBg: $default-settings-bg,
+          itemBorder: $default-item-border,
+          linkColor: $default-link-color,
+          skullHeadBg: $default-skull-head-bg,
+          skullEyes: $default-skull-eyes,
+          skullCrack: $default-skull-crack,
+          skullCrackTriangle: $default-skull-crack-triangle,
+          skullMouthBg: $default-skull-mouth-bg,
+          skullNose: $default-skull-nose,
+          skullTeeth: $default-skull-teeth,
+        ) !global;
+      } @else if $theme == 'night' {
+        $theme-map: (
+          loaderColor: $night-loader-color,
+          headerBg: $night-header-bg,
+          headerBgActive: $night-header-bg-active,
+          fontColor: $night-font-color,
+          bgColor: $night-bg-color,
+          wrapperBg: $night-wrapper-bg,
+          headerLink: $night-header-link,
+          secondaryFontColor: $night-secondary-font-color,
+          headerBorder: $night-header-border,
+          settingsBg: $night-settings-bg,
+          itemBorder: $night-item-border,
+          linkColor: $night-link-color,
+          skullHeadBg: $night-skull-head-bg,
+          skullEyes: $night-skull-eyes,
+          skullCrack: $night-skull-crack,
+          skullCrackTriangle: $night-skull-crack-triangle,
+          skullMouthBg: $night-skull-mouth-bg,
+          skullNose: $night-skull-nose,
+          skullTeeth: $night-skull-teeth,
+        ) !global;
+      } @else if $theme == 'amoledblack' {
+        $theme-map: (
+          loaderColor: $amoledblack-loader-color,
+          headerBg: $amoledblack-header-bg,
+          headerBgActive: $amoledblack-header-bg-active,
+          fontColor: $amoledblack-font-color,
+          bgColor: $amoledblack-bg-color,
+          wrapperBg: $amoledblack-wrapper-bg,
+          headerLink: $amoledblack-header-link,
+          secondaryFontColor: $amoledblack-secondary-font-color,
+          headerBorder: $amoledblack-header-border,
+          settingsBg: $amoledblack-settings-bg,
+          itemBorder: $amoledblack-item-border,
+          linkColor: $amoledblack-link-color,
+          skullHeadBg: $amoledblack-skull-head-bg,
+          skullEyes: $amoledblack-skull-eyes,
+          skullCrack: $amoledblack-skull-crack,
+          skullCrackTriangle: $amoledblack-skull-crack-triangle,
+          skullMouthBg: $amoledblack-skull-mouth-bg,
+          skullNose: $amoledblack-skull-nose,
+          skullTeeth: $amoledblack-skull-teeth,
+        ) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

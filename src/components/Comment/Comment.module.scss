@@ -1,0 +1,92 @@
+@import '../../styles/themes';
+@import '../../styles/media';
+
+.comment {
+  padding: 8px 0 8px 0;
+
+  @include themify() {
+    border-bottom: 1px solid themed('itemBorder');
+  }
+}
+
+.commentHeader {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  user-select: none;
+
+  @include themify() {
+    color: themed('secondaryFontColor');
+  }
+
+  a {
+    @include themify() {
+      color: themed('linkColor');
+    }
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.toggleIcon {
+  font-size: 10px;
+  width: 14px;
+}
+
+.commentBody {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 5px 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+
+  a {
+    @include themify() {
+      color: themed('linkColor');
+    }
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: 8px;
+    border-radius: 3px;
+
+    @include themify() {
+      background-color: themed('settingsBg');
+    }
+  }
+
+  code {
+    font-size: 13px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+}
+
+.children {
+  padding-left: 20px;
+
+  @media #{$mobile-only} {
+    padding-left: 10px;
+  }
+}
+
+.deleted {
+  font-style: italic;
+  font-size: 13px;
+
+  @include themify() {
+    color: themed('secondaryFontColor');
+  }
+}

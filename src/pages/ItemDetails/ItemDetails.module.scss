@@ -1,0 +1,115 @@
+@import '../../styles/themes';
+@import '../../styles/media';
+
+.itemDetails {
+  padding: 15px;
+
+  @media #{$mobile-only} {
+    padding: 10px;
+  }
+}
+
+.title {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+  line-height: 1.3;
+
+  a {
+    text-decoration: none;
+
+    @include themify() {
+      color: themed('fontColor');
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.domain {
+  font-size: 12px;
+
+  @include themify() {
+    color: themed('secondaryFontColor');
+  }
+}
+
+.meta {
+  font-size: 12px;
+  margin: 8px 0 15px;
+
+  @include themify() {
+    color: themed('secondaryFontColor');
+  }
+
+  a {
+    text-decoration: none;
+
+    @include themify() {
+      color: themed('linkColor');
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.content {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+
+  a {
+    @include themify() {
+      color: themed('linkColor');
+    }
+  }
+}
+
+.poll {
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 3px;
+
+  @include themify() {
+    background-color: themed('settingsBg');
+  }
+}
+
+.pollOption {
+  padding: 5px 0;
+  font-size: 14px;
+
+  @include themify() {
+    color: themed('fontColor');
+  }
+}
+
+.pollPoints {
+  font-weight: bold;
+  margin-right: 8px;
+
+  @include themify() {
+    color: themed('linkColor');
+  }
+}
+
+.commentsHeader {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 15px 0 10px;
+  padding-bottom: 8px;
+
+  @include themify() {
+    color: themed('fontColor');
+    border-bottom: 1px solid themed('itemBorder');
+  }
+}

@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import CommentThread from '../components/CommentThread';
 import { commentCountLabel } from '../utils/comment';
+import { sanitizeHtml } from '../utils/html';
 import './ItemDetailsPage.scss';
 
 export default function ItemDetailsPage() {
@@ -107,8 +108,8 @@ export default function ItemDetailsPage() {
         {item.type === 'poll' && item.poll && (
           <div className="pollResults">
             {item.poll.map((pollResult, index) => (
-              <div key={index} className="pollContent">
-                <div dangerouslySetInnerHTML={{ __html: pollResult.content }} />
+              <div key={`poll-${index}`} className="pollContent">
+                <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(pollResult.content) }} />
                 <div className="subtext">{pollResult.points} points</div>
                 <div
                   className="pollBar"
@@ -125,7 +126,7 @@ export default function ItemDetailsPage() {
         {item.content && (
           <p
             className="subject"
-            dangerouslySetInnerHTML={{ __html: item.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.content) }}
           />
         )}
         <ul className="comment-list">

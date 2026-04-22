@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Comment } from '../types/comment';
+import { sanitizeHtml } from '../utils/html';
 import './CommentThread.scss';
 
 interface CommentThreadProps {
-  comment: Comment;
+  readonly comment: Comment;
 }
 
 export default function CommentThread({ comment }: CommentThreadProps) {
@@ -21,9 +22,14 @@ export default function CommentThread({ comment }: CommentThreadProps) {
   return (
     <div>
       <div className={collapse ? 'meta meta-collapse' : 'meta'}>
-        <span className="collapse" onClick={() => setCollapse((c) => !c)}>
+        <button
+          type="button"
+          className="collapse"
+          aria-expanded={!collapse}
+          onClick={() => setCollapse((c) => !c)}
+        >
           [{collapse ? '+' : '-'}]
-        </span>{' '}
+        </button>{' '}
         <Link to={`/user/${comment.user}`}>{comment.user}</Link>
         <span className="time">{comment.time_ago}</span>
       </div>
@@ -32,7 +38,7 @@ export default function CommentThread({ comment }: CommentThreadProps) {
           <div>
             <p
               className="comment-text"
-              dangerouslySetInnerHTML={{ __html: comment.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(comment.content) }}
             />
             <ul className="subtree">
               {comment.comments.map((subComment) => (

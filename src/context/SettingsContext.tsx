@@ -16,6 +16,20 @@ const STORAGE_KEYS = {
   theme: 'theme',
 } as const;
 
+const VALID_THEMES: readonly ThemeName[] = ['default', 'night', 'amoledblack'];
+
+function toValidTheme(value: string): ThemeName {
+  return VALID_THEMES.includes(value as ThemeName)
+    ? (value as ThemeName)
+    : 'default';
+}
+
+function toValidPixelSize(value: string, fallback: string): string {
+  const parsed = Number.parseInt(value, 10);
+  if (!Number.isFinite(parsed) || parsed < 8 || parsed > 64) return fallback;
+  return String(parsed);
+}
+
 function loadInitialSettings(): Settings {
   const storedTheme = typeof window !== 'undefined'
     ? (localStorage.getItem(STORAGE_KEYS.theme) as ThemeName | null)
@@ -95,18 +109,21 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setTheme = useCallback((theme: ThemeName) => {
-    localStorage.setItem(STORAGE_KEYS.theme, theme);
-    setSettings((prev) => ({ ...prev, theme }));
+    const safeTheme = toValidTheme(theme);
+    localStorage.setItem(STORAGE_KEYS.theme, safeTheme);
+    setSettings((prev) => ({ ...prev, theme: safeTheme }));
   }, []);
 
   const setFont = useCallback((fontSize: string) => {
-    localStorage.setItem(STORAGE_KEYS.titleFontSize, fontSize);
-    setSettings((prev) => ({ ...prev, titleFontSize: fontSize }));
+    const safeFontSize = toValidPixelSize(fontSize, '14');
+    localStorage.setItem(STORAGE_KEYS.titleFontSize, safeFontSize);
+    setSettings((prev) => ({ ...prev, titleFontSize: safeFontSize }));
   }, []);
 
   const setSpacing = useCallback((listSpace: string) => {
-    localStorage.setItem(STORAGE_KEYS.listSpacing, listSpace);
-    setSettings((prev) => ({ ...prev, listSpacing: listSpace }));
+    const safeSpacing = toValidPixelSize(listSpace, '10');
+    localStorage.setItem(STORAGE_KEYS.listSpacing, safeSpacing);
+    setSettings((prev) => ({ ...prev, listSpacing: safeSpacing }));
   }, []);
 
   const value = useMemo(

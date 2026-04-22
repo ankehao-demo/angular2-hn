@@ -40,7 +40,12 @@ export default function UserPage() {
     <div className="profile">
       <div className="mobile item-header">
         <p className="title-block">
-          <span className="back-button" onClick={goBack} />
+          <button
+            type="button"
+            className="back-button"
+            onClick={goBack}
+            aria-label="Go back"
+          />
           Profile: {user.id}
         </p>
       </div>

@@ -23,9 +23,14 @@ export default function SettingsPanel() {
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={toggleSettings} aria-label="Close settings">
+        <button
+          type="button"
+          className="close"
+          onClick={toggleSettings}
+          aria-label="Close settings"
+        >
           ×
-        </span>
+        </button>
         <div className="content">
           <div className="control-section">
             <h2>Links</h2>

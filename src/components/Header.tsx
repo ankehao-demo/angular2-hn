@@ -53,12 +53,15 @@ export default function Header() {
           </div>
         </div>
         <div className="info">
-          <img
+          <button
+            type="button"
             className="settings"
-            src="/assets/images/cog.svg"
-            alt="Settings"
+            aria-label="Toggle settings"
+            aria-expanded={settings.showSettings}
             onClick={toggleSettings}
-          />
+          >
+            <img src="/assets/images/cog.svg" alt="" aria-hidden="true" />
+          </button>
         </div>
       </div>
       {settings.showSettings && <SettingsPanel />}

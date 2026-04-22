@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useApiFetch, fetchItemContent } from '../../hooks/useHackerNewsApi';
+import { useSettings } from '../../context/SettingsContext';
 import Comment from '../../components/Comment/Comment';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
@@ -8,6 +9,7 @@ import styles from './ItemDetails.module.scss';
 export default function ItemDetails() {
   const { id } = useParams<{ id: string }>();
   const itemId = Number(id);
+  const { openLinkInNewTab } = useSettings();
 
   const { data: item, loading, error } = useApiFetch(
     () => fetchItemContent(itemId),
@@ -30,7 +32,11 @@ export default function ItemDetails() {
     <div className={styles.itemDetails}>
       <h2 className={styles.title}>
         {item.url ? (
-          <a href={item.url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={item.url}
+            target={openLinkInNewTab ? '_blank' : '_self'}
+            rel={openLinkInNewTab ? 'noopener noreferrer' : undefined}
+          >
             {item.title}
           </a>
         ) : (

@@ -19,15 +19,24 @@ export async function fetchFeed(feedType: string, page: number): Promise<Story[]
 
 export async function fetchItemContent(id: number): Promise<Story> {
   const story = await lazyFetch<Story>(`${apiBaseUrl}/item/${id}`);
-  if (story.type === 'poll') {
-    const pollResults = await fetchPollContent(id);
-    story.poll = pollResults;
+  if (story.type === 'poll' && story.poll && story.poll.length > 0) {
+    const numberOfPollOptions = story.poll.length;
+    story.poll_votes_count = 0;
+    const pollPromises = [];
+    for (let i = 1; i <= numberOfPollOptions; i++) {
+      pollPromises.push(fetchPollContent(story.id + i));
+    }
+    const pollResults = await Promise.all(pollPromises);
+    for (let i = 0; i < pollResults.length; i++) {
+      story.poll[i] = pollResults[i];
+      story.poll_votes_count += pollResults[i].points || 0;
+    }
   }
   return story;
 }
 
-export async function fetchPollContent(id: number): Promise<PollResult[]> {
-  return lazyFetch<PollResult[]>(`${apiBaseUrl}/item/${id}/poll`);
+export async function fetchPollContent(id: number): Promise<PollResult> {
+  return lazyFetch<PollResult>(`${apiBaseUrl}/item/${id}`);
 }
 
 export async function fetchUser(id: string): Promise<User> {

@@ -71,7 +71,28 @@ More to come!
 
 Feel free to send me feedback on [twitter](https://twitter.com/hdjirdeh) or [file an issue](https://github.com/hdjirdeh/angular2-hn/issues/new)! Feature requests are always welcome.
 
-## Build process
+## Running Both Apps Side-by-Side
+
+This repository contains both the original Angular app and a React port for comparison.
+
+### Angular (port 4200)
+```bash
+npm install
+npm start
+# Open http://localhost:4200
+```
+
+### React (port 5173)
+```bash
+cd react-app
+npm install
+npm run dev
+# Open http://localhost:5173
+```
+
+Both apps can run simultaneously on different ports for side-by-side comparison.
+
+## Build process (Angular)
 
 Note: This project has been ejected (with AOT + production settings) in order to customize Webpack configurations.
 
@@ -83,6 +104,16 @@ Note: Any Service Worker changes will not be reflected when you run the applicat
  - `npm build`
  - `npm run precache` to generate the service worker file
  - `npm run static-serve` to load the application along with the service worker asset using [live-server](https://github.com/tapio/live-server)
+
+## Build process (React)
+
+```bash
+cd react-app
+npm install
+npm run build
+```
+
+The production build output will be in `react-app/dist/`.
 
 ## Contributors
 

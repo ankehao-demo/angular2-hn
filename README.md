@@ -84,6 +84,38 @@ Note: Any Service Worker changes will not be reflected when you run the applicat
  - `npm run precache` to generate the service worker file
  - `npm run static-serve` to load the application along with the service worker asset using [live-server](https://github.com/tapio/live-server)
 
+## Deployment
+
+### Static deployment (S3 + CloudFront)
+
+```bash
+# Build the app
+npm run build -- --configuration production
+
+# Deploy infrastructure
+cd terraform
+terraform init
+terraform apply
+
+# Sync build output to S3
+aws s3 sync ../dist/angular-hnpwa s3://$(terraform output -raw s3_bucket_name) --delete
+
+# Invalidate CloudFront cache
+aws cloudfront create-invalidation --distribution-id $(terraform output -raw cloudfront_distribution_id) --paths "/*"
+```
+
+### Container deployment
+
+```bash
+# Build Docker image
+docker build -t angular2-hn .
+
+# Run locally
+docker run -p 8080:80 angular2-hn
+
+# Push to ECR and deploy via ECS (if using ecs.tf)
+```
+
 ## Contributors
 
 A million thanks to some awesome people :)

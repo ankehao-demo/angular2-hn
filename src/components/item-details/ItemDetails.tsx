@@ -31,7 +31,7 @@ export default function ItemDetails() {
         <div className="item">
           <div className="mobile item-header">
             <p className="title-block">
-              <span className="back-button" onClick={goBack}></span>
+              <button className="back-button" onClick={goBack} aria-label="Go back"></button>
               {hasUrl ? (
                 <a
                   className="title"

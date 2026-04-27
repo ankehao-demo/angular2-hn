@@ -30,6 +30,18 @@ function getInitialSettings(): Settings {
   };
 }
 
+const VALID_THEMES = ['default', 'night', 'amoledblack'];
+
+function sanitizeNumeric(value: string, fallback: string): string {
+  const num = parseInt(value, 10);
+  if (isNaN(num) || num < 0 || num > 100) return fallback;
+  return String(num);
+}
+
+function sanitizeTheme(value: string): string {
+  return VALID_THEMES.includes(value) ? value : 'default';
+}
+
 function settingsReducer(state: Settings, action: SettingsAction): Settings {
   switch (action.type) {
     case 'TOGGLE_SETTINGS':
@@ -39,15 +51,21 @@ function settingsReducer(state: Settings, action: SettingsAction): Settings {
       localStorage.setItem('openLinkInNewTab', JSON.stringify(newVal));
       return { ...state, openLinkInNewTab: newVal };
     }
-    case 'SET_THEME':
-      localStorage.setItem('theme', action.payload);
-      return { ...state, theme: action.payload };
-    case 'SET_FONT':
-      localStorage.setItem('titleFontSize', action.payload);
-      return { ...state, titleFontSize: action.payload };
-    case 'SET_SPACING':
-      localStorage.setItem('listSpacing', action.payload);
-      return { ...state, listSpacing: action.payload };
+    case 'SET_THEME': {
+      const theme = sanitizeTheme(action.payload);
+      localStorage.setItem('theme', theme);
+      return { ...state, theme };
+    }
+    case 'SET_FONT': {
+      const fontSize = sanitizeNumeric(action.payload, state.titleFontSize);
+      localStorage.setItem('titleFontSize', fontSize);
+      return { ...state, titleFontSize: fontSize };
+    }
+    case 'SET_SPACING': {
+      const spacing = sanitizeNumeric(action.payload, state.listSpacing);
+      localStorage.setItem('listSpacing', spacing);
+      return { ...state, listSpacing: spacing };
+    }
     default:
       return state;
   }

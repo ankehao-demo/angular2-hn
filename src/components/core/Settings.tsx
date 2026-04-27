@@ -10,9 +10,9 @@ export default function Settings() {
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={toggleSettings}>
+        <button className="close" onClick={toggleSettings} aria-label="Close settings">
           &times;
-        </span>
+        </button>
         <div className="content">
           <div className="control-section">
             <h2>Links</h2>

@@ -1,0 +1,74 @@
+import { useState, useEffect, useCallback, type ReactNode } from 'react';
+import type { Settings } from '../models/Settings';
+import { SettingsContext } from './settingsContextDef';
+
+function sanitizeNumericInput(value: string, fallback: string): string {
+  const num = Number(value);
+  if (!Number.isFinite(num) || num < 0 || num > 100) return fallback;
+  return String(num);
+}
+
+function getInitialTheme(): string {
+  const saved = localStorage.getItem('theme');
+  if (saved) return saved;
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'night';
+  return 'default';
+}
+
+export function SettingsProvider({ children }: { children: ReactNode }) {
+  const [settings, setSettings] = useState<Settings>(() => ({
+    showSettings: false,
+    openLinkInNewTab: localStorage.getItem('openLinkInNewTab')
+      ? JSON.parse(localStorage.getItem('openLinkInNewTab')!)
+      : false,
+    theme: getInitialTheme(),
+    titleFontSize: localStorage.getItem('titleFontSize') ?? '16',
+    listSpacing: localStorage.getItem('listSpacing') ?? '0',
+  }));
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem('theme')) {
+        setSettings(prev => ({ ...prev, theme: e.matches ? 'night' : 'default' }));
+      }
+    };
+    media.addEventListener('change', handler);
+    return () => media.removeEventListener('change', handler);
+  }, []);
+
+  const toggleSettings = useCallback(() => {
+    setSettings(prev => ({ ...prev, showSettings: !prev.showSettings }));
+  }, []);
+
+  const toggleOpenLinksInNewTab = useCallback(() => {
+    setSettings(prev => {
+      const next = !prev.openLinkInNewTab;
+      localStorage.setItem('openLinkInNewTab', JSON.stringify(next));
+      return { ...prev, openLinkInNewTab: next };
+    });
+  }, []);
+
+  const setTheme = useCallback((theme: string) => {
+    localStorage.setItem('theme', theme);
+    setSettings(prev => ({ ...prev, theme }));
+  }, []);
+
+  const setFont = useCallback((fontSize: string) => {
+    const sanitized = sanitizeNumericInput(fontSize, '16');
+    localStorage.setItem('titleFontSize', sanitized);
+    setSettings(prev => ({ ...prev, titleFontSize: sanitized }));
+  }, []);
+
+  const setSpacing = useCallback((listSpace: string) => {
+    const sanitized = sanitizeNumericInput(listSpace, '0');
+    localStorage.setItem('listSpacing', sanitized);
+    setSettings(prev => ({ ...prev, listSpacing: sanitized }));
+  }, []);
+
+  return (
+    <SettingsContext.Provider value={{ settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing }}>
+      {children}
+    </SettingsContext.Provider>
+  );
+}

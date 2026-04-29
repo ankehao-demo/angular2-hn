@@ -1,0 +1,40 @@
+import { NavLink, Link } from 'react-router-dom';
+import { useSettings } from '../../context/useSettings';
+import { Settings as SettingsModal } from '../Settings/Settings';
+import './Header.module.scss';
+
+export function Header() {
+  const { settings, toggleSettings } = useSettings();
+
+  const scrollTop = () => window.scrollTo(0, 0);
+
+  return (
+    <header>
+      <div id="header">
+        <Link className="home-link" to="/news/1" onClick={scrollTop}>
+          <div className="logo-inner"></div>
+          <img className="logo" src="/assets/images/logo.svg" alt="Logo" />
+        </Link>
+        <div className="header-text">
+          <div className="left">
+            <span className="header-nav">
+              <NavLink to="/newest/1" className={({ isActive }) => isActive ? 'active' : ''} onClick={scrollTop}>new</NavLink>
+                {' | '}
+              <NavLink to="/show/1" className={({ isActive }) => isActive ? 'active' : ''} onClick={scrollTop}>show</NavLink>
+                {' | '}
+              <NavLink to="/ask/1" className={({ isActive }) => isActive ? 'active' : ''} onClick={scrollTop}>ask</NavLink>
+                {' | '}
+              <NavLink to="/jobs/1" className={({ isActive }) => isActive ? 'active' : ''} onClick={scrollTop}>jobs</NavLink>
+            </span>
+          </div>
+        </div>
+        <div className="info">
+          <button type="button" className="settings" onClick={toggleSettings} aria-label="Settings">
+            <img src="/assets/images/cog.svg" alt="Settings" />
+          </button>
+        </div>
+      </div>
+      {settings.showSettings && <SettingsModal />}
+    </header>
+  );
+}

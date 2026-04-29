@@ -88,6 +88,9 @@ a {
     transition: all 200ms ease;
     left: 4%;
     transform: translate3d(0, -50%, 0) rotate(-135deg);
+    border: none;
+    padding: 0;
+    cursor: pointer;
   }
 }
 

@@ -61,7 +61,7 @@ export function UserProfile() {
         <div className="profile">
           <div className="mobile item-header">
             <p className="title-block">
-              <span className="back-button" onClick={goBack}></span>
+              <button type="button" className="back-button" onClick={goBack} aria-label="Go back"></button>
               Profile: {user.id}
             </p>
           </div>

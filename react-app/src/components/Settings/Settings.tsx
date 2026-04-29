@@ -9,7 +9,7 @@ export function Settings() {
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={toggleSettings}>&times;</span>
+        <button type="button" className="close" onClick={toggleSettings}>&times;</button>
         <div className="content">
           <div className="control-section">
             <h2>Links</h2>

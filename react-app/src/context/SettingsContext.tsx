@@ -2,6 +2,12 @@ import { useState, useEffect, useCallback, type ReactNode } from 'react';
 import type { Settings } from '../models/Settings';
 import { SettingsContext } from './settingsContextDef';
 
+function sanitizeNumericInput(value: string, fallback: string): string {
+  const num = Number(value);
+  if (!Number.isFinite(num) || num < 0 || num > 100) return fallback;
+  return String(num);
+}
+
 function getInitialTheme(): string {
   const saved = localStorage.getItem('theme');
   if (saved) return saved;
@@ -49,13 +55,15 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setFont = useCallback((fontSize: string) => {
-    localStorage.setItem('titleFontSize', fontSize);
-    setSettings(prev => ({ ...prev, titleFontSize: fontSize }));
+    const sanitized = sanitizeNumericInput(fontSize, '16');
+    localStorage.setItem('titleFontSize', sanitized);
+    setSettings(prev => ({ ...prev, titleFontSize: sanitized }));
   }, []);
 
   const setSpacing = useCallback((listSpace: string) => {
-    localStorage.setItem('listSpacing', listSpace);
-    setSettings(prev => ({ ...prev, listSpacing: listSpace }));
+    const sanitized = sanitizeNumericInput(listSpace, '0');
+    localStorage.setItem('listSpacing', sanitized);
+    setSettings(prev => ({ ...prev, listSpacing: sanitized }));
   }, []);
 
   return (

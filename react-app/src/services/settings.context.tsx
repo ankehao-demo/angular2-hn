@@ -66,18 +66,24 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setTheme = useCallback((theme: string) => {
-    setSettings(prev => ({ ...prev, theme }));
-    localStorage.setItem('theme', theme);
+    const validThemes = ['default', 'night', 'amoledblack'];
+    const safeTheme = validThemes.includes(theme) ? theme : 'default';
+    setSettings(prev => ({ ...prev, theme: safeTheme }));
+    localStorage.setItem('theme', safeTheme);
   }, []);
 
   const setFont = useCallback((fontSize: string) => {
-    setSettings(prev => ({ ...prev, titleFontSize: fontSize }));
-    localStorage.setItem('titleFontSize', fontSize);
+    const parsed = parseInt(fontSize, 10);
+    const safeFontSize = String(isNaN(parsed) ? 16 : Math.max(1, Math.min(100, parsed)));
+    setSettings(prev => ({ ...prev, titleFontSize: safeFontSize }));
+    localStorage.setItem('titleFontSize', safeFontSize);
   }, []);
 
   const setSpacing = useCallback((listSpace: string) => {
-    setSettings(prev => ({ ...prev, listSpacing: listSpace }));
-    localStorage.setItem('listSpacing', listSpace);
+    const parsed = parseInt(listSpace, 10);
+    const safeSpacing = String(isNaN(parsed) ? 0 : Math.max(0, Math.min(100, parsed)));
+    setSettings(prev => ({ ...prev, listSpacing: safeSpacing }));
+    localStorage.setItem('listSpacing', safeSpacing);
   }, []);
 
   return (

@@ -34,7 +34,7 @@ export default function User() {
         <div className="profile">
           <div className="mobile item-header">
             <p className="title-block">
-              <span className="back-button" onClick={goBack}></span>
+              <span className="back-button" role="button" tabIndex={0} onClick={goBack} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') goBack(); }}></span>
               Profile: {user.id}
             </p>
           </div>

@@ -9,7 +9,7 @@ export default function Settings() {
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={toggleSettings}>&times;</span>
+        <button type="button" className="close" onClick={toggleSettings} aria-label="Close settings">&times;</button>
         <div className="content">
           <div className="control-section">
             <h2>Links</h2>
@@ -68,7 +68,7 @@ export default function Settings() {
                   <input
                     min="1"
                     value={settings.titleFontSize}
-                    name="theme"
+                    name="titleFontSize"
                     type="number"
                     onChange={(e) => setFont(e.target.value)}
                   />
@@ -80,7 +80,7 @@ export default function Settings() {
                   <input
                     min="0"
                     value={settings.listSpacing}
-                    name="theme"
+                    name="listSpacing"
                     type="number"
                     onChange={(e) => setSpacing(e.target.value)}
                   />

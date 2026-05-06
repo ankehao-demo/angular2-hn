@@ -31,7 +31,9 @@ export default function Header() {
           </div>
         </div>
         <div className="info">
-          <img className="settings" src="/assets/images/cog.svg" alt="Settings" onClick={toggleSettings} />
+          <button type="button" className="settings-button" onClick={toggleSettings} aria-label="Settings">
+            <img className="settings" src="/assets/images/cog.svg" alt="Settings" />
+          </button>
         </div>
       </div>
       {settings.showSettings && <Settings />}

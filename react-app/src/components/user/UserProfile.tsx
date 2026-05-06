@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { User } from '../../models/user';
 import { fetchUser } from '../../services/hackernews-api.service';
+import { sanitizeHtml } from '../../utils/sanitize';
 import Loader from '../shared/Loader';
 import ErrorMessage from '../shared/ErrorMessage';
 import './UserProfile.scss';
@@ -35,7 +36,7 @@ export default function UserProfile() {
         <div className="profile">
           <div className="mobile item-header">
             <p className="title-block">
-              <span className="back-button" onClick={goBack}></span>
+              <button type="button" className="back-button" onClick={goBack} aria-label="Go back"></button>
               Profile: {user.id}
             </p>
           </div>
@@ -46,7 +47,7 @@ export default function UserProfile() {
           </div>
           {user.about && (
             <div className="other-details">
-              <p dangerouslySetInnerHTML={{ __html: user.about }} />
+              <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(user.about) }} />
             </div>
           )}
         </div>

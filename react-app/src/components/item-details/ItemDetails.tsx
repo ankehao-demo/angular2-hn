@@ -4,6 +4,7 @@ import type { Story } from '../../models/story';
 import { fetchItemContent } from '../../services/hackernews-api.service';
 import { useSettings } from '../../services/settings.context';
 import { formatComment } from '../../utils/comment';
+import { sanitizeHtml } from '../../utils/sanitize';
 import Loader from '../shared/Loader';
 import ErrorMessage from '../shared/ErrorMessage';
 import CommentComponent from './CommentComponent';
@@ -42,7 +43,7 @@ export default function ItemDetails() {
         <div className="item">
           <div className="mobile item-header">
             <p className="title-block">
-              <span className="back-button" onClick={goBack}></span>
+              <button type="button" className="back-button" onClick={goBack} aria-label="Go back"></button>
               {hasUrl ? (
                 <a
                   className="title"
@@ -101,7 +102,7 @@ export default function ItemDetails() {
             <div className="pollResults">
               {item.poll.map((pollResult, idx) => (
                 <div key={idx} className="pollContent">
-                  <div dangerouslySetInnerHTML={{ __html: pollResult.content }} />
+                  <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(pollResult.content) }} />
                   <div className="subtext">{pollResult.points} points</div>
                   <div
                     className="pollBar"
@@ -111,7 +112,7 @@ export default function ItemDetails() {
               ))}
             </div>
           )}
-          <p className="subject" dangerouslySetInnerHTML={{ __html: item.content || '' }} />
+          <p className="subject" dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.content || '') }} />
           <ul className="comment-list">
             {item.comments &&
               item.comments.map((comment) => (

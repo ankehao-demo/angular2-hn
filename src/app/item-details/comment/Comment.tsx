@@ -23,7 +23,7 @@ export default function Comment({ comment }: CommentProps) {
   return (
     <div>
       <div className={`meta${collapse ? ' meta-collapse' : ''}`}>
-        <span className="collapse" onClick={() => setCollapse(!collapse)}>[{collapse ? '+' : '-'}]</span>{' '}
+        <span className="collapse" role="button" tabIndex={0} onClick={() => setCollapse(!collapse)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setCollapse(!collapse); }}>[{collapse ? '+' : '-'}]</span>{' '}
         <Link to={`/user/${comment.user}`}>{comment.user}</Link>
         <span className="time">{comment.time_ago}</span>
       </div>

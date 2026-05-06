@@ -10,17 +10,35 @@ interface SettingsContextType {
   setSpacing: (listSpace: string) => void;
 }
 
+function sanitizeNumericString(value: string | null, fallback: string): string {
+  if (value === null) return fallback;
+  const num = Number(value);
+  return Number.isFinite(num) && num >= 0 ? String(num) : fallback;
+}
+
+function sanitizeBoolean(value: string | null, fallback: boolean): boolean {
+  if (value === null) return fallback;
+  return value === 'true';
+}
+
+const VALID_THEMES = ['default', 'night', 'amoledblack'] as const;
+
+function sanitizeTheme(value: string | null): string {
+  if (value && (VALID_THEMES as readonly string[]).includes(value)) return value;
+  return 'default';
+}
+
 const defaultSettings: Settings = {
   showSettings: false,
-  openLinkInNewTab: typeof window !== 'undefined' && localStorage.getItem('openLinkInNewTab')
-    ? JSON.parse(localStorage.getItem('openLinkInNewTab')!)
+  openLinkInNewTab: typeof window !== 'undefined'
+    ? sanitizeBoolean(localStorage.getItem('openLinkInNewTab'), false)
     : false,
   theme: 'default',
-  titleFontSize: typeof window !== 'undefined' && localStorage.getItem('titleFontSize')
-    ? localStorage.getItem('titleFontSize')!
+  titleFontSize: typeof window !== 'undefined'
+    ? sanitizeNumericString(localStorage.getItem('titleFontSize'), '16')
     : '16',
-  listSpacing: typeof window !== 'undefined' && localStorage.getItem('listSpacing')
-    ? localStorage.getItem('listSpacing')!
+  listSpacing: typeof window !== 'undefined'
+    ? sanitizeNumericString(localStorage.getItem('listSpacing'), '0')
     : '0',
 };
 
@@ -31,13 +49,14 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   const listenerRef = useRef<((e: MediaQueryListEvent) => void) | null>(null);
 
   const setTheme = useCallback((theme: string) => {
-    setSettings(prev => ({ ...prev, theme }));
-    localStorage.setItem('theme', theme);
+    const validated = sanitizeTheme(theme);
+    setSettings(prev => ({ ...prev, theme: validated }));
+    localStorage.setItem('theme', validated);
   }, []);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
+    const savedTheme = sanitizeTheme(localStorage.getItem('theme'));
+    if (savedTheme !== 'default') {
       setSettings(prev => ({ ...prev, theme: savedTheme }));
     } else {
       const darkMedia = window.matchMedia('(prefers-color-scheme: dark)');
@@ -72,13 +91,15 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setFont = useCallback((fontSize: string) => {
-    setSettings(prev => ({ ...prev, titleFontSize: fontSize }));
-    localStorage.setItem('titleFontSize', fontSize);
+    const sanitized = sanitizeNumericString(fontSize, '16');
+    setSettings(prev => ({ ...prev, titleFontSize: sanitized }));
+    localStorage.setItem('titleFontSize', sanitized);
   }, []);
 
   const setSpacing = useCallback((listSpace: string) => {
-    setSettings(prev => ({ ...prev, listSpacing: listSpace }));
-    localStorage.setItem('listSpacing', listSpace);
+    const sanitized = sanitizeNumericString(listSpace, '0');
+    setSettings(prev => ({ ...prev, listSpacing: sanitized }));
+    localStorage.setItem('listSpacing', sanitized);
   }, []);
 
   return (

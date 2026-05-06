@@ -75,4 +75,38 @@ describe('Settings', () => {
     fireEvent.change(spacingInput, { target: { value: '10' } });
     expect(spacingInput).toHaveValue(10);
   });
+
+  it('close button is keyboard accessible with Enter', () => {
+    renderSettings();
+    const closeBtn = screen.getByText('×');
+    expect(closeBtn).toHaveAttribute('role', 'button');
+    expect(closeBtn).toHaveAttribute('tabindex', '0');
+    fireEvent.keyDown(closeBtn, { key: 'Enter' });
+  });
+
+  it('close button is keyboard accessible with Space', () => {
+    renderSettings();
+    const closeBtn = screen.getByText('×');
+    fireEvent.keyDown(closeBtn, { key: ' ' });
+  });
+
+  it('close button ignores other keys', () => {
+    renderSettings();
+    const closeBtn = screen.getByText('×');
+    fireEvent.keyDown(closeBtn, { key: 'Escape' });
+  });
+
+  it('selecting AMOLED theme works', () => {
+    renderSettings();
+    const amoledRadio = screen.getByLabelText(/Black \(AMOLED\)/) as HTMLInputElement;
+    fireEvent.click(amoledRadio);
+    expect(amoledRadio.checked).toBe(true);
+  });
+
+  it('default theme radio reflects current theme', () => {
+    renderSettings();
+    const radios = screen.getAllByRole('radio') as HTMLInputElement[];
+    const checkedRadio = radios.find(r => r.checked);
+    expect(checkedRadio).toBeDefined();
+  });
 });

@@ -56,4 +56,26 @@ describe('Header', () => {
     const newLink = screen.getByText('new').closest('a');
     expect(newLink).toHaveClass('active');
   });
+
+  it('settings cog opens settings via keyboard Enter', () => {
+    renderHeader();
+    const settingsIcon = screen.getByAltText('Settings');
+    expect(screen.queryByText('Select a theme')).not.toBeInTheDocument();
+    fireEvent.keyDown(settingsIcon, { key: 'Enter' });
+    expect(screen.getByText('Select a theme')).toBeInTheDocument();
+  });
+
+  it('settings cog opens settings via keyboard Space', () => {
+    renderHeader();
+    const settingsIcon = screen.getByAltText('Settings');
+    fireEvent.keyDown(settingsIcon, { key: ' ' });
+    expect(screen.getByText('Select a theme')).toBeInTheDocument();
+  });
+
+  it('settings cog ignores other keys', () => {
+    renderHeader();
+    const settingsIcon = screen.getByAltText('Settings');
+    fireEvent.keyDown(settingsIcon, { key: 'Tab' });
+    expect(screen.queryByText('Select a theme')).not.toBeInTheDocument();
+  });
 });

@@ -9,7 +9,7 @@ export default function Settings() {
       <div className="popup">
         <h1>Settings</h1>
         <hr />
-        <span className="close" onClick={toggleSettings}>&times;</span>
+        <span className="close" role="button" tabIndex={0} onClick={toggleSettings} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') toggleSettings(); }}>&times;</span>
         <div className="content">
           <div className="control-section">
             <h2>Links</h2>

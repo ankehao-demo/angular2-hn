@@ -96,4 +96,61 @@ describe('SettingsContext', () => {
     }).toThrow('useSettings must be used within a SettingsProvider');
     consoleSpy.mockRestore();
   });
+
+  it('sanitizes invalid titleFontSize from localStorage', () => {
+    localStorage.setItem('titleFontSize', '<script>alert(1)</script>');
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    expect(result.current.settings.titleFontSize).toBe('16');
+  });
+
+  it('sanitizes invalid listSpacing from localStorage', () => {
+    localStorage.setItem('listSpacing', 'malicious');
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    expect(result.current.settings.listSpacing).toBe('0');
+  });
+
+  it('sanitizes negative numeric values', () => {
+    localStorage.setItem('titleFontSize', '-5');
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    expect(result.current.settings.titleFontSize).toBe('16');
+  });
+
+  it('sanitizes invalid theme from localStorage', () => {
+    const mockMatchMedia = jest.fn().mockReturnValue({
+      matches: false,
+      media: '(prefers-color-scheme: dark)',
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    });
+    Object.defineProperty(window, 'matchMedia', { value: mockMatchMedia, writable: true });
+    localStorage.setItem('theme', 'malicious-theme');
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    expect(result.current.settings.theme).toBe('default');
+  });
+
+  it('setTheme rejects invalid theme values', () => {
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    act(() => result.current.setTheme('invalid'));
+    expect(result.current.settings.theme).toBe('default');
+    expect(localStorage.getItem('theme')).toBe('default');
+  });
+
+  it('setFont sanitizes non-numeric input', () => {
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    act(() => result.current.setFont('abc'));
+    expect(result.current.settings.titleFontSize).toBe('16');
+  });
+
+  it('setSpacing sanitizes non-numeric input', () => {
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    act(() => result.current.setSpacing('xyz'));
+    expect(result.current.settings.listSpacing).toBe('0');
+  });
+
+  it('sanitizes invalid openLinkInNewTab from localStorage', () => {
+    localStorage.setItem('openLinkInNewTab', 'notaboolean');
+    const { result } = renderHook(() => useSettings(), { wrapper });
+    expect(result.current.settings.openLinkInNewTab).toBe(false);
+  });
 });

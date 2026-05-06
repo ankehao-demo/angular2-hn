@@ -63,4 +63,25 @@ describe('Comment', () => {
     const { container } = renderComment();
     expect(container.querySelector('.meta')).toBeInTheDocument();
   });
+
+  it('collapse toggle works with keyboard Enter', () => {
+    renderComment();
+    const toggles = screen.getAllByText('[-]');
+    fireEvent.keyDown(toggles[0], { key: 'Enter' });
+    expect(screen.getByText('[+]')).toBeInTheDocument();
+  });
+
+  it('collapse toggle works with keyboard Space', () => {
+    renderComment();
+    const toggles = screen.getAllByText('[-]');
+    fireEvent.keyDown(toggles[0], { key: ' ' });
+    expect(screen.getByText('[+]')).toBeInTheDocument();
+  });
+
+  it('collapse toggle ignores other keys', () => {
+    renderComment();
+    const toggles = screen.getAllByText('[-]');
+    fireEvent.keyDown(toggles[0], { key: 'Tab' });
+    expect(screen.queryByText('[+]')).not.toBeInTheDocument();
+  });
 });

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Story } from '../../shared/models/story';
 import { useSettings } from '../../shared/services/SettingsContext';
 import { formatComment } from '../../shared/utils/formatComment';
+import Subtext from '../../shared/components/subtext/Subtext';
 import './item.component.scss';
 
 interface FeedItemProps {
@@ -55,22 +56,14 @@ export default function FeedItem({ item }: FeedItemProps) {
         </div>
       </div>
       <div className="subtext-laptop">
-        {item.type !== 'job' && (
-          <span>
-            {item.points} points by{' '}
-            <Link to={`/user/${item.user}`}>{item.user}</Link>
-          </span>
-        )}
-        <span className={item.type !== 'job' ? 'item-details' : ''}>
-          {item.time_ago}
-          {item.type !== 'job' && (
-            <span> |{' '}
-              <Link to={`/item/${item.id}`}>
-                {formatComment(item.comments_count)}
-              </Link>
-            </span>
-          )}
-        </span>
+        <Subtext
+          itemId={item.id}
+          points={item.points}
+          user={item.user}
+          time_ago={item.time_ago}
+          comments_count={item.comments_count}
+          isJob={item.type === 'job'}
+        />
       </div>
     </div>
   );

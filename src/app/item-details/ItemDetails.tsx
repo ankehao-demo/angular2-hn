@@ -3,9 +3,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { fetchItemContent } from '../shared/services/hackernews-api';
 import { useSettings } from '../shared/services/SettingsContext';
 import { Story } from '../shared/models/story';
-import { formatComment } from '../shared/utils/formatComment';
 import Loader from '../shared/components/loader/Loader';
 import ErrorMessage from '../shared/components/error-message/ErrorMessage';
+import Subtext from '../shared/components/subtext/Subtext';
 import Comment from './comment/Comment';
 import './item-details.component.scss';
 
@@ -41,7 +41,7 @@ export default function ItemDetails() {
         <div className="item">
           <div className="mobile item-header">
             <p className="title-block">
-              <span className="back-button" onClick={goBack}></span>
+              <span className="back-button" role="button" tabIndex={0} onClick={goBack} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') goBack(); }}></span>
               {hasUrl ? (
                 <a className="title" href={item.url} target={settings.openLinkInNewTab ? '_blank' : undefined} rel={settings.openLinkInNewTab ? 'noopener' : undefined}>
                   {item.title}
@@ -68,24 +68,14 @@ export default function ItemDetails() {
                 </Link>
               </p>
             )}
-            <div className="subtext">
-              {item.type !== 'job' && (
-                <span>
-                  {item.points} points by{' '}
-                  <Link to={`/user/${item.user}`}>{item.user}</Link>
-                </span>
-              )}
-              <span className={item.type !== 'job' ? 'item-details' : ''}>
-                {item.time_ago}
-                {item.type !== 'job' && (
-                  <span> |{' '}
-                    <Link to={`/item/${item.id}`}>
-                      {formatComment(item.comments_count)}
-                    </Link>
-                  </span>
-                )}
-              </span>
-            </div>
+            <Subtext
+              itemId={item.id}
+              points={item.points}
+              user={item.user}
+              time_ago={item.time_ago}
+              comments_count={item.comments_count}
+              isJob={item.type === 'job'}
+            />
           </div>
           {item.type === 'poll' && (
             <div className="pollResults">
